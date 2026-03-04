@@ -1,0 +1,6 @@
+# Original large video files (exceed GitHub 100MB limit)
+assets/images/Medpredict.mp4
+assets/images/Surveilance.mp4
+
+# Claude Code
+.claude/

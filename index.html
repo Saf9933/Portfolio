@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salma Filali — Software &amp; AI Engineer</title>
+  <meta name="description" content="Portfolio of Salma Filali — Software & AI Engineer specializing in machine learning, full-stack development, and big data." />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            dark: { 900: '#fdf2f8', 800: '#fff1f2', 700: '#fce7f3', 600: '#fbcfe8' },
+            accent: { pink: '#ec4899', purple: '#c084fc', blue: '#818cf8', cyan: '#22d3ee' },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f5f0f3;
+      color: #1e293b;
+      overflow-x: hidden;
+    }
+
+    /* ── Custom Scrollbar ── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f5f0f3; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ec4899, #f9a8d4);
+      border-radius: 4px;
+    }
+    html { scrollbar-color: #ec4899 #f5f0f3; }
+
+    /* ── Scroll Progress Bar ── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+      background: linear-gradient(90deg, #ec4899, #f9a8d4, #c084fc);
+      transform-origin: left; transform: scaleX(0);
+      transition: none;
+    }
+
+    /* ── Cursor Glow ── */
+    #cursor-glow {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,72,153,0.18) 0%, rgba(192,132,252,0.08) 40%, transparent 70%);
+      pointer-events: none; z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.15s ease-out, top 0.15s ease-out;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── Glass ── */
+    .glass {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 8px 32px rgba(236, 72, 153, 0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    /* ── Gradient Text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #ec4899, #f472b6, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Glow Border ── */
+    .glow-border {
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glow-border:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(236, 72, 153, 0.15), 0 8px 16px rgba(192,132,252,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
+      border-color: rgba(236, 72, 153, 0.3);
+    }
+
+    /* Shimmer border wrapper — used on cards that DON'T have overflow:hidden */
+    .glow-wrap {
+      position: relative;
+      border-radius: 1rem;
+    }
+    .glow-wrap::before {
+      content: '';
+      position: absolute; inset: -2px; border-radius: inherit; z-index: -1;
+      background: linear-gradient(135deg, #ec4899, #f9a8d4, #c084fc);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .glow-wrap:hover::before { opacity: 1; }
+
+    /* ── Blobs ── */
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+      animation: blob-float 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes blob-float {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(30px, -20px) scale(1.05); }
+      66%  { transform: translate(-20px, 20px) scale(0.95); }
+      100% { transform: translate(10px, -10px) scale(1.02); }
+    }
+
+    /* ── Floating Code Snippets ── */
+    .floating-code {
+      position: absolute;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: rgba(236, 72, 153, 0.25);
+      pointer-events: none;
+      white-space: nowrap;
+      animation: float-code 6s ease-in-out infinite alternate;
+      text-shadow: 0 0 20px rgba(236, 72, 153, 0.1);
+    }
+    @keyframes float-code {
+      0%   { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-20px) rotate(3deg); }
+    }
+
+    /* ── Nav active link ── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #ec4899, #f9a8d4);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after { width: 100%; }
+
+    /* ── Timeline ── */
+    .timeline-line {
+      position: absolute; left: 50%; top: 0;
+      width: 2px; height: 100%;
+      background: rgba(236, 72, 153, 0.15);
+      transform: translateX(-50%);
+    }
+    .timeline-line-fill {
+      position: absolute; left: 50%; top: 0;
+      width: 2px; height: 0;
+      background: linear-gradient(180deg, #ec4899, #f9a8d4, #c084fc);
+      transform: translateX(-50%);
+    }
+    .timeline-dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: linear-gradient(135deg, #ec4899, #f9a8d4);
+      border: 3px solid #f5f0f3;
+      position: absolute; left: 50%; top: 0;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-line, .timeline-line-fill { left: 20px; }
+      .timeline-dot { left: 20px; }
+    }
+
+    /* ── Skill Badge ── */
+    .skill-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1rem; border-radius: 9999px;
+      font-size: 0.875rem; font-weight: 500;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 2px 8px rgba(236, 72, 153, 0.04), inset 0 1px 0 rgba(255,255,255,0.5);
+      transition: all 0.3s ease;
+      color: #475569;
+    }
+    .skill-badge:hover {
+      border-color: rgba(236, 72, 153, 0.35);
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+      transform: translateY(-2px);
+    }
+
+    /* ── GitHub Contribution Graph ── */
+    .gh-grid { display: flex; gap: 3px; }
+    .gh-col  { display: flex; flex-direction: column; gap: 3px; }
+    .gh-cell {
+      width: 11px; height: 11px; border-radius: 3px;
+      transition: outline 0.15s ease;
+    }
+    .gh-cell:hover { outline: 2px solid rgba(236,72,153,0.5); outline-offset: 1px; }
+    .gh-month-labels { display: flex; gap: 3px; margin-bottom: 4px; padding-left: 32px; }
+    .gh-month-labels span { font-size: 10px; color: #94a3b8; }
+    .gh-day-labels { display: flex; flex-direction: column; gap: 3px; margin-right: 6px; padding-top: 0; }
+    .gh-day-labels span { font-size: 10px; color: #94a3b8; height: 11px; line-height: 11px; }
+    .gh-year-btn {
+      padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+      border: 1px solid rgba(236,72,153,0.2); color: #64748b; background: transparent;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .gh-year-btn:hover { border-color: rgba(236,72,153,0.4); color: #ec4899; }
+    .gh-year-btn.active {
+      background: linear-gradient(135deg,#ec4899,#c084fc); color: #fff;
+      border-color: transparent; box-shadow: 0 2px 8px rgba(236,72,153,0.3);
+    }
+    .gh-tooltip {
+      position: fixed; padding: 6px 10px; border-radius: 6px; font-size: 11px;
+      background: #1e293b; color: #fff; pointer-events: none; z-index: 9999;
+      white-space: nowrap; opacity: 0; transition: opacity 0.15s ease;
+    }
+
+    /* ── Skill Bubble ── */
+    .skill-bubble {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 1rem; border-radius: 9999px;
+      font-size: 0.8rem; font-weight: 500; color: #475569;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 2px 8px rgba(236,72,153,0.04);
+      cursor: default;
+      animation: bubble-float 3s ease-in-out infinite alternate;
+    }
+    .skill-bubble:nth-child(2n)   { animation-duration: 3.5s; animation-delay: 0.4s; }
+    .skill-bubble:nth-child(3n)   { animation-duration: 2.8s; animation-delay: 0.8s; }
+    .skill-bubble:nth-child(4n)   { animation-duration: 3.2s; animation-delay: 1.2s; }
+    .skill-bubble:nth-child(5n)   { animation-duration: 3.8s; animation-delay: 0.2s; }
+    .skill-bubble:nth-child(6n)   { animation-duration: 2.6s; animation-delay: 1.5s; }
+    .skill-bubble:nth-child(7n)   { animation-duration: 3.4s; animation-delay: 0.6s; }
+    .skill-bubble:hover {
+      background: rgba(255,255,255,0.65);
+      border-color: rgba(236,72,153,0.3);
+      box-shadow: 0 4px 16px rgba(236,72,153,0.1);
+      animation-play-state: paused;
+    }
+    @keyframes bubble-float {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    /* ── Section heading underline ── */
+    .section-line {
+      width: 60px; height: 4px; border-radius: 2px;
+      background: linear-gradient(90deg, #ec4899, #f9a8d4);
+      margin: 0.75rem auto 0;
+    }
+
+    /* ── Hero character reveal ── */
+    .char-reveal { display: inline-block; opacity: 0; transform: translateY(40px); }
+    .gradient-text .char-reveal {
+      background: inherit;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Availability badge pulse ── */
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    }
+
+    /* ── Scroll Indicator ── */
+    .scroll-indicator {
+      animation: scroll-bounce 2s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ── Project card gradient header ── */
+    .project-header {
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(148,163,184,0.15);
+    }
+
+    /* ── Contact form focus ring ── */
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(236, 72, 153, 0.4);
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.08);
+    }
+
+    /* ── Code Editor Animation ── */
+    .code-window {
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(236, 72, 153, 0.08);
+    }
+    .code-header {
+      background: rgba(30, 41, 59, 0.95);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .code-header-title {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px; color: #64748b; margin-left: 8px;
+    }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-dot-red { background: #ef4444; }
+    .code-dot-yellow { background: #eab308; }
+    .code-dot-green { background: #22c55e; }
+    .code-layout { display: flex; height: 370px; }
+    .code-sidebar {
+      width: 180px; min-width: 180px;
+      background: rgba(20, 30, 48, 0.6);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 8px 0;
+      overflow-y: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
+    }
+    .code-sidebar::-webkit-scrollbar { width: 3px; }
+    .code-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+    .code-folder {
+      padding: 5px 12px; cursor: pointer; color: #94a3b8;
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.15s ease, color 0.15s ease;
+      user-select: none;
+    }
+    .code-folder:hover { background: rgba(255,255,255,0.04); color: #e2e8f0; }
+    .code-folder.open { color: #f472b6; }
+    .code-folder .folder-icon { font-size: 10px; transition: transform 0.2s ease; }
+    .code-folder.open .folder-icon { transform: rotate(90deg); }
+    .code-folder-files { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+    .code-folder-files.open { max-height: 300px; }
+    .code-file {
+      padding: 4px 12px 4px 30px; cursor: pointer; color: #64748b;
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+    .code-file:hover { background: rgba(255,255,255,0.04); color: #cbd5e1; }
+    .code-file.active { color: #f472b6; background: rgba(236, 72, 153, 0.08); }
+    .code-file-icon { font-size: 10px; }
+    .code-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .code-tabs {
+      display: flex; gap: 0;
+      background: rgba(20, 30, 48, 0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow-x: auto; min-height: 32px;
+    }
+    .code-tab {
+      padding: 6px 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      border-right: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      background: none;
+      border-top: none;
+      border-left: none;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .code-tab:hover { color: #cbd5e1; }
+    .code-tab.active {
+      color: #f472b6;
+      border-bottom-color: #ec4899;
+      background: rgba(236, 72, 153, 0.05);
+    }
+    .code-body {
+      padding: 16px 0;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      color: #cbd5e1;
+      counter-reset: line;
+      scrollbar-width: thin;
+      scrollbar-color: #ec4899 transparent;
+      min-height: 0;
+    }
+    .code-body::-webkit-scrollbar { width: 4px; }
+    .code-body::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 2px; }
+    @media (max-width: 640px) {
+      .code-sidebar { width: 140px; min-width: 140px; }
+      .code-file { padding-left: 22px; }
+    }
+    .code-line {
+      display: flex;
+      padding: 0 20px 0 0;
+    }
+    .code-line-num {
+      display: inline-block;
+      width: 48px;
+      min-width: 48px;
+      text-align: right;
+      padding-right: 16px;
+      color: #334155;
+      user-select: none;
+      font-size: 12px;
+    }
+    .code-line-content { flex: 1; white-space: pre; }
+    /* syntax colors */
+    .syn-kw { color: #c084fc; }       /* keywords: def, class, import, from, return, if, for */
+    .syn-fn { color: #60a5fa; }       /* function names, method calls */
+    .syn-str { color: #34d399; }      /* strings */
+    .syn-cmt { color: #475569; font-style: italic; }  /* comments */
+    .syn-num { color: #f59e0b; }      /* numbers */
+    .syn-op { color: #94a3b8; }       /* operators, brackets */
+    .syn-type { color: #f472b6; }     /* types, class names, decorators */
+    .syn-param { color: #fb923c; }    /* parameters */
+    .syn-self { color: #ec4899; }     /* self, this */
+    @keyframes blink-cursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .code-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 16px;
+      background: #f472b6;
+      animation: blink-cursor 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    .code-project-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 11px;
+      color: #64748b;
+      font-family: 'Fira Code', monospace;
+    }
+    .code-project-label .proj-name { color: #f472b6; font-weight: 600; }
+    .code-project-label .proj-desc { color: #64748b; }
+
+    /* ── Reduced Motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .floating-code, .blob { display: none; }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Cursor Glow -->
+  <div id="cursor-glow"></div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       1. NAVBAR
+       ════════════════════════════════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background:transparent;">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="#hero" class="text-2xl font-bold gradient-text tracking-tight">SF.</a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#about" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">About</a>
+        <a href="#experience" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">Experience</a>
+        <a href="#projects" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">Projects</a>
+        <a href="#github" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">GitHub</a>
+        <a href="#skills" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">Skills</a>
+        <a href="#publications" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">Publications</a>
+        <a href="#contact" class="nav-link text-sm text-slate-500 hover:text-slate-900 transition-colors">Contact</a>
+      </div>
+
+      <!-- Resume CTA -->
+      <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+        <i class="fa-solid fa-paper-plane text-xs"></i> Get in Touch
+      </a>
+
+      <!-- Mobile Hamburger -->
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+        <span class="block w-6 h-0.5 bg-slate-700 transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="block w-6 h-0.5 bg-slate-700 transition-all duration-300" id="bar2"></span>
+        <span class="block w-6 h-0.5 bg-slate-700 transition-all duration-300 origin-center" id="bar3"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden glass overflow-hidden transition-all duration-300" style="max-height:0;">
+      <div class="px-6 py-4 flex flex-col gap-4">
+        <a href="#about" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">About</a>
+        <a href="#experience" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">Experience</a>
+        <a href="#projects" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">Projects</a>
+        <a href="#github" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">GitHub</a>
+        <a href="#skills" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">Skills</a>
+        <a href="#publications" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">Publications</a>
+        <a href="#contact" class="mobile-nav-link text-slate-500 hover:text-slate-900 transition-colors">Contact</a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
+          <i class="fa-solid fa-paper-plane text-xs"></i> Get in Touch
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       2. HERO
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Blobs -->
+    <div class="blob w-[600px] h-[600px] bg-pink-300/50 -top-40 -left-40" style="animation-delay:0s;"></div>
+    <div class="blob w-[500px] h-[500px] bg-fuchsia-300/40 top-1/2 -right-32" style="animation-delay:2s;"></div>
+    <div class="blob w-[400px] h-[400px] bg-purple-300/35 bottom-0 left-1/3" style="animation-delay:4s;"></div>
+
+    <!-- Floating code -->
+    <div id="floating-code-container" class="absolute inset-0 overflow-hidden"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <!-- Availability Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-slate-500 mb-8" data-animate="fade-up">
+        <span class="pulse-dot"></span>
+        Open to opportunities
+      </div>
+
+      <!-- Name -->
+      <h1 id="hero-name" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6">
+        <span class="text-slate-800">Salma</span><span class="text-slate-800"> Filali</span>
+      </h1>
+
+      <!-- Typed Roles -->
+      <div class="text-xl sm:text-2xl md:text-3xl font-light text-slate-500 mb-6 h-10">
+        <span id="typed-roles"></span>
+      </div>
+
+      <!-- Tagline -->
+      <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-10 leading-relaxed" data-animate="fade-up">
+        Building intelligent systems at the intersection of
+        <span class="text-pink-500 font-medium">software engineering</span> and
+        <span class="text-rose-400 font-medium">artificial intelligence</span>.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap justify-center gap-4 mb-12" data-animate="fade-up">
+        <a href="#projects" class="px-8 py-3.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-0.5">
+          View My Work <i class="fa-solid fa-arrow-right ml-2"></i>
+        </a>
+        <a href="#contact" class="px-8 py-3.5 rounded-full text-sm font-semibold text-slate-700 glass hover:bg-pink-50 transition-all duration-300 hover:-translate-y-0.5">
+          <i class="fa-solid fa-envelope mr-2"></i> Contact Me
+        </a>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex justify-center gap-5" data-animate="fade-up">
+        <a href="https://github.com/saf9933" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-300 transition-all duration-300" aria-label="GitHub">
+          <i class="fa-brands fa-github text-xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/salma-filali-5b5b572b6/" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-300 transition-all duration-300" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in text-xl"></i>
+        </a>
+        <a href="mailto:Salmaf99o@gmail.com" class="w-12 h-12 rounded-full glass flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-300 transition-all duration-300" aria-label="Email">
+          <i class="fa-solid fa-envelope text-xl"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-pink-300 scroll-indicator">
+      <span class="text-xs tracking-widest uppercase">Scroll</span>
+      <i class="fa-solid fa-chevron-down text-sm"></i>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       CODE SHOWCASE
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="code-showcase" class="relative py-16 px-6">
+    <div class="max-w-3xl mx-auto" data-animate="fade-up">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">Code I <span class="gradient-text">Write</span></h2>
+        <p class="text-slate-500 text-sm mt-2">Real snippets from my projects — auto-playing or click a tab to explore</p>
+      </div>
+      <div class="code-window" id="code-window">
+        <div class="code-header">
+          <span class="code-dot code-dot-red"></span>
+          <span class="code-dot code-dot-yellow"></span>
+          <span class="code-dot code-dot-green"></span>
+          <span class="code-header-title" id="code-header-title">Explorer</span>
+        </div>
+        <div class="code-layout">
+          <div class="code-sidebar" id="code-sidebar"></div>
+          <div class="code-main">
+            <div class="code-tabs" id="code-tabs"></div>
+            <div class="code-body" id="code-body"></div>
+          </div>
+        </div>
+        <div class="code-project-label" id="code-label"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       3. ABOUT
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="about" class="relative py-24 px-6 overflow-hidden">
+    <div class="blob w-[400px] h-[400px] bg-pink-300/30 -top-20 -right-40" style="animation-delay:1s;"></div>
+    <div class="blob w-[300px] h-[300px] bg-purple-300/20 bottom-0 -left-20" style="animation-delay:3s;"></div>
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">About <span class="gradient-text">Me</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Bio -->
+        <div data-animate="fade-right">
+          <p class="text-slate-500 leading-relaxed mb-6">
+            I'm a <span class="text-slate-800 font-semibold">Software &amp; AI Engineer</span> with production experience across distributed ML systems, LLM-powered SaaS platforms, real-time computer vision, and full-stack development. I studied Software Engineering at Sichuan University (Top 10 in China) on a full Belt and Road scholarship starting at age 17.
+          </p>
+          <p class="text-slate-500 leading-relaxed mb-6">
+            I've built and shipped systems across Morocco, China, and Australia &mdash; from multi-tenant recruitment platforms to 500-camera surveillance systems to distributed LLM fine-tuning frameworks deployed at AntGroup.
+          </p>
+          <p class="text-slate-500 leading-relaxed">
+            I frequently take on project lead roles, managing teams and owning products end-to-end from architecture to deployment. I work across the full stack with a focus on AI integration in production environments.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-4" data-animate="fade-left">
+          <div class="glass rounded-2xl p-6 text-center glow-border" data-tilt>
+            <div class="text-3xl font-black gradient-text mb-1">5+</div>
+            <div class="text-sm text-slate-500">Projects</div>
+          </div>
+          <div class="glass rounded-2xl p-6 text-center glow-border" data-tilt>
+            <div class="text-3xl font-black gradient-text mb-1">4</div>
+            <div class="text-sm text-slate-500">Languages</div>
+          </div>
+          <div class="glass rounded-2xl p-6 text-center glow-border" data-tilt>
+            <div class="text-3xl font-black gradient-text mb-1">3</div>
+            <div class="text-sm text-slate-500">Countries</div>
+          </div>
+          <div class="glass rounded-2xl p-6 text-center glow-border" data-tilt>
+            <div class="text-3xl font-black gradient-text mb-1">1</div>
+            <div class="text-sm text-slate-500">Publication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       4. EXPERIENCE
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="experience" class="relative py-24 px-6 bg-gradient-to-b from-[#efe8ec] to-transparent overflow-hidden">
+    <div class="blob w-[350px] h-[350px] bg-fuchsia-300/25 top-1/4 -left-32" style="animation-delay:2s;"></div>
+    <div class="blob w-[300px] h-[300px] bg-pink-200/30 bottom-1/4 -right-20" style="animation-delay:5s;"></div>
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">My <span class="gradient-text">Experience</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+      </div>
+
+      <div class="relative" id="timeline">
+        <!-- Timeline line -->
+        <div class="timeline-line"></div>
+        <div class="timeline-line-fill" id="timeline-fill"></div>
+
+        <!-- Entry 1 -->
+        <div class="relative mb-12 md:w-1/2 md:pr-12 md:ml-auto md:text-left" data-animate="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="glass rounded-2xl p-6 glow-border">
+            <span class="text-xs font-mono text-pink-400 mb-2 block">Oct 2025 — Present</span>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">Full Stack &amp; AI Engineer | Project Lead</h3>
+            <p class="text-sm text-pink-500 mb-3">Wineo AI, Casablanca</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">
+              Sole developer of two enterprise platforms: <strong class="text-slate-700">ARA-3</strong>, a full ATS automating hiring end-to-end — multi-channel CV ingestion, dual-engine scoring (ATS + LLM), AI-proctored assessments, LinkedIn posting, and i18n (FR/EN/AR). <strong class="text-slate-700">Qanoun Portal</strong>, a 7-module AI legal platform for Moroccan law — contract generation, legal chat, RAG, billing, and admin. ~170 files, 80+ endpoints across both platforms.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">React</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">SvelteKit</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">FastAPI</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Node.js</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">TensorFlow.js</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">LLM</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">RAG</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">WhatsApp API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 2 -->
+        <div class="relative mb-12 md:w-1/2 md:pl-12 md:text-left" data-animate="fade-right">
+          <div class="timeline-dot"></div>
+          <div class="glass rounded-2xl p-6 glow-border">
+            <span class="text-xs font-mono text-pink-400 mb-2 block">Jul 2025 — Sep 2025</span>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">Lead Full Stack Developer</h3>
+            <p class="text-sm text-pink-500 mb-3">Jiangsu Yuexiu Technology, Remote (Shenzhen)</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">
+              Built the full-stack 庐山博物馆AI视频中台 (Lushan Museum AI Video Platform) &mdash; 66 REST API endpoints + WebSocket, 6 AI detection types, 32-permission RBAC, real-time alert lifecycle management. Designed and shipped both the FastAPI backend and Vue 3 frontend.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">FastAPI</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Vue 3</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">PostgreSQL</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Redis</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Docker</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">WebSocket</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 3 -->
+        <div class="relative mb-12 md:w-1/2 md:pr-12 md:ml-auto" data-animate="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="glass rounded-2xl p-6 glow-border">
+            <span class="text-xs font-mono text-pink-400 mb-2 block">Jul 2024 — Jul 2025</span>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">AI Research Engineer</h3>
+            <p class="text-sm text-pink-500 mb-3">IDS Lab, Sichuan University, Chengdu</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">
+              Co-authored demo paper on mLoRA, a distributed multi-LoRA LLM fine-tuning system (PVLDB 2025 Demo Track). Built Text2SQL and LLM4DP demonstration scenarios. Optimized PyTorch pipelines (+35% throughput) and GPU scheduling (-20% execution time). Full research paper accepted at VLDB 2025.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">PyTorch</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">CUDA</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">NCCL</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">LoRA</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">LLaMA 2</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Distributed Training</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 4 -->
+        <div class="relative mb-12 md:w-1/2 md:pl-12 md:text-left" data-animate="fade-right">
+          <div class="timeline-dot"></div>
+          <div class="glass rounded-2xl p-6 glow-border">
+            <span class="text-xs font-mono text-pink-400 mb-2 block">Mar 2024 — Apr 2024</span>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">iOS &amp; Big Data Intern</h3>
+            <p class="text-sm text-pink-500 mb-3">SunCaper Data Co., Chengdu</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-3">
+              Built BizFinder, a full-stack business discovery app powered by the Yelp dataset (2+ TB). Designed an ETL pipeline with Hadoop (HDFS + MapReduce) for ingestion, MySQL for normalized storage, and Spark (SQL, MLlib) for user behavior analysis, business metrics, and review sentiment analysis. Developed the iOS client in Swift with personalized ML-driven recommendations, MapKit integration, review submission, and data visualization (bar charts, heatmaps, interactive maps).
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Hadoop</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Spark</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">MySQL</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Swift</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">MLlib</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">MapKit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       5. PROJECTS
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="projects" class="relative py-24 px-6 overflow-hidden">
+    <div class="blob w-[450px] h-[450px] bg-purple-300/25 top-20 -right-40" style="animation-delay:1.5s;"></div>
+    <div class="blob w-[350px] h-[350px] bg-pink-300/20 bottom-20 -left-32" style="animation-delay:4s;"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">Featured <span class="gradient-text">Projects</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
+
+        <!-- Project 1: ARA-3 -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-users-gear text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">ARA-3</h3>
+                <p class="text-xs text-slate-400">Applicant Tracking System</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-pink-50 text-pink-500 border border-pink-200/50">In Production</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">Sole Developer (Full-Stack) &mdash; Wineo AI, Casablanca</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Full-stack ATS automating the entire hiring pipeline: CV ingestion from email, WhatsApp, Google Drive &amp; careers page &rarr; auto-parse &rarr; skill matching &rarr; ATS+LLM scoring &rarr; test invitations &rarr; AI-proctored assessments &rarr; top-K profiles emailed to recruiters. Multi-provider LLM, LinkedIn job posting, i18n (FR/EN/AR). ~170 files, 80+ endpoints, built solo. 3 organizations in production.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">React</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">FastAPI</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Node.js</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">TensorFlow.js</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">MediaPipe</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">LLM</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">WhatsApp API</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/Saf9933/ARA-3" target="_blank" rel="noopener" class="text-sm text-slate-400 hover:text-pink-500 transition-colors"><i class="fa-brands fa-github mr-1"></i>GitHub <i class="fa-solid fa-lock text-[10px] ml-0.5"></i></a>
+              <button onclick="openProjectModal(0)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+                Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Qanoun Portal -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-scale-balanced text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">Qanoun Portal</h3>
+                <p class="text-xs text-slate-400">AI Legal Technology Platform</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-pink-50 text-pink-500 border border-pink-200/50">In Production</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">Full Stack Developer & AI Engineer &mdash; Wineo AI, Casablanca</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Self-hosted AI legal platform built entirely around Moroccan legislation &mdash; Dahirs, laws, decrees, and legal codes. Contract drafting with AI sidebar, dual-mode legal chat (opinions &amp; research), RAG with traceable citations to specific articles, credit-based billing in MAD, and full admin panel with RBAC. 7 modules.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">SvelteKit</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">FastAPI</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">RAG</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">ChromaDB</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Socket.io</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Docker/K8s</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/Saf9933/Qanoun-Portal" target="_blank" rel="noopener" class="text-sm text-slate-400 hover:text-pink-500 transition-colors"><i class="fa-brands fa-github mr-1"></i>GitHub <i class="fa-solid fa-lock text-[10px] ml-0.5"></i></a>
+              <button onclick="openProjectModal(1)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+                Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: mLoRA -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-microchip text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">mLoRA</h3>
+                <p class="text-xs text-slate-400">Distributed LLM Fine-Tuning</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-500 border border-emerald-200/50">Open Source</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">AI Research Engineer, Co-author &mdash; IDS Lab, Sichuan University</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Open-source framework for parallel multi-LoRA LLM fine-tuning. Zero-bubble pipeline parallelism and batched GPU operations achieve 30&ndash;45% faster training than FSDP. Deployed at AntGroup. VLDB 2025.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">PyTorch</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">CUDA</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">NCCL</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">LoRA</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Pipeline Parallelism</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">LLaMA 2</span>
+            </div>
+            <div class="flex items-center gap-4 mb-3">
+              <a href="https://github.com/TUDB-Labs/mLoRA" target="_blank" rel="noopener" class="text-sm text-slate-400 hover:text-pink-500 transition-colors"><i class="fa-brands fa-github mr-1"></i>GitHub</a>
+              <a href="https://doi.org/10.5281/zenodo.18827406" target="_blank" rel="noopener" class="text-sm text-slate-400 hover:text-pink-500 transition-colors"><i class="fa-solid fa-link mr-1"></i>Paper</a>
+              <a href="https://youtu.be/m2qMYlFmmfo" target="_blank" rel="noopener" class="text-sm text-slate-400 hover:text-pink-500 transition-colors"><i class="fa-solid fa-video mr-1"></i>Video</a>
+            </div>
+            <button onclick="openProjectModal(2)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+              Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 4: Lushan Museum AI Video Platform -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-video text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">庐山博物馆AI视频中台</h3>
+                <p class="text-xs text-slate-400">Lushan Museum AI Video Platform</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-500 border border-blue-200/50">Delivered</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">Lead Full-Stack Developer &mdash; Jiangsu Yuexiu Technology, Shenzhen</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Full-stack enterprise platform for intelligent video surveillance and AI-powered security at the Lushan Museum. 66 REST API endpoints, 6 AI detection types, real-time WebSocket alerts, and 32-permission RBAC system.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">FastAPI</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Vue 3</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">PostgreSQL</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Redis</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Docker</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">WebSocket</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <button onclick="openProjectModal(3)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+                Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+              </button>
+              <button onclick="openProjectModal(3)" class="flex items-center gap-1.5 text-sm font-medium text-purple-500 hover:text-purple-600 transition-colors cursor-pointer">
+                <i class="fa-solid fa-circle-play"></i> Demo Video
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Big Data Pipeline -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-database text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">BizFinder</h3>
+                <p class="text-xs text-slate-400">Big Data Business Discovery App</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-500 border border-blue-200/50">Internship</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">Intern Developer &mdash; SunCaper Data Co., Chengdu</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Full-stack business finder app powered by the Yelp dataset (2+ TB). Hadoop ETL pipeline (HDFS + MapReduce) with Spark analytics (SQL, MLlib) for user behavior analysis, sentiment analysis, and personalized recommendations. Native iOS client in Swift with MapKit, search, reviews, and ML-driven results.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Hadoop</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Spark</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">HDFS</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">MySQL</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Swift</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">MapKit</span>
+            </div>
+            <button onclick="openProjectModal(4)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+              Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 6: MedPredict -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-stethoscope text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">MedPredict</h3>
+                <p class="text-xs text-slate-400">AI Medical Education Platform</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-50 text-purple-500 border border-purple-200/50">Thesis</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">Undergraduate Thesis &mdash; Sichuan University, College of Software Engineering</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Interactive medical education platform with fine-tuned PubMedBERT for MCQ classification (42.7&ndash;46.3% on MedMCQA), plus flashcard generator, symptom checker, clinical case simulator with AI feedback, and hybrid RAG textbook search. 5 integrated learning modules.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">PubMedBERT</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">PyTorch</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Vue 3</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Node.js</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">HuggingFace</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">SQLite</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Mistral 7B</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <button onclick="openProjectModal(5)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+                Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+              </button>
+              <button onclick="openProjectModal(5)" class="flex items-center gap-1.5 text-sm font-medium text-purple-500 hover:text-purple-600 transition-colors cursor-pointer">
+                <i class="fa-solid fa-circle-play"></i> Watch Video
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Detail Modal -->
+  <div id="project-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" style="background:rgba(0,0,0,0.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+    <div class="glass rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto relative" style="background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.5);box-shadow:0 32px 64px rgba(236,72,153,0.1);">
+      <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-slate-500 hover:text-pink-500 transition-colors z-10" aria-label="Close">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <div id="project-modal-content" class="p-8 sm:p-10"></div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       5b. GITHUB CONTRIBUTIONS
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="github" class="relative py-16 px-6 overflow-hidden">
+    <div class="blob w-[300px] h-[300px] bg-purple-300/20 -top-16 -right-24" style="animation-delay:3s;"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800" data-animate="fade-up">GitHub <span class="gradient-text">Contributions</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+      </div>
+
+      <div class="glass rounded-2xl p-6 sm:p-8 glow-border" data-animate="fade-up">
+        <!-- Year tabs -->
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <div id="gh-year-tabs" class="flex gap-2 flex-wrap"></div>
+          <div class="text-sm text-slate-500" id="gh-total-count"></div>
+        </div>
+
+        <!-- Contribution grid -->
+        <div class="overflow-x-auto">
+          <div id="gh-graph" class="min-w-[700px]">
+            <div class="text-sm text-slate-400 text-center py-10">Loading contributions...</div>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex items-center justify-end gap-2 mt-4">
+          <span class="text-xs text-slate-400">Less</span>
+          <span class="w-[11px] h-[11px] rounded-[3px]" style="background:#fce7f3;"></span>
+          <span class="w-[11px] h-[11px] rounded-[3px]" style="background:#f9a8d4;"></span>
+          <span class="w-[11px] h-[11px] rounded-[3px]" style="background:#ec4899;"></span>
+          <span class="w-[11px] h-[11px] rounded-[3px]" style="background:#be185d;"></span>
+          <span class="w-[11px] h-[11px] rounded-[3px]" style="background:#831843;"></span>
+          <span class="text-xs text-slate-400">More</span>
+        </div>
+      </div>
+
+      <div class="text-center mt-8" data-animate="fade-up">
+        <a href="https://github.com/saf9933" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-0.5">
+          <i class="fa-brands fa-github"></i> View Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       6. SKILLS
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="skills" class="relative py-24 px-6 bg-gradient-to-b from-[#efe8ec] to-transparent overflow-hidden">
+    <div class="blob w-[400px] h-[400px] bg-pink-300/25 top-10 -left-40" style="animation-delay:0.5s;"></div>
+    <div class="blob w-[300px] h-[300px] bg-fuchsia-200/30 bottom-10 -right-20" style="animation-delay:3.5s;"></div>
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">Skills &amp; <span class="gradient-text">Technologies</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+      </div>
+
+      <div class="space-y-10">
+
+        <!-- Languages -->
+        <div data-animate="fade-up">
+          <div class="flex items-center justify-center gap-2.5 mb-4">
+            <i class="fa-solid fa-code text-pink-400 text-lg"></i>
+            <h3 class="text-lg font-bold text-slate-700">Languages</h3>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2.5">
+            <span class="skill-bubble"><i class="fa-brands fa-python text-yellow-500"></i> Python</span>
+            <span class="skill-bubble"><i class="fa-brands fa-java text-red-400"></i> Java</span>
+            <span class="skill-bubble"><i class="fa-brands fa-js text-yellow-400"></i> JavaScript</span>
+            <span class="skill-bubble">TypeScript</span>
+            <span class="skill-bubble"><i class="fa-solid fa-c text-blue-400"></i> C / C++</span>
+            <span class="skill-bubble">SQL</span>
+            <span class="skill-bubble"><i class="fa-solid fa-terminal text-green-500"></i> Bash</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div data-animate="fade-up">
+          <div class="flex items-center justify-center gap-2.5 mb-4">
+            <i class="fa-solid fa-server text-purple-400 text-lg"></i>
+            <h3 class="text-lg font-bold text-slate-700">Backend</h3>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2.5">
+            <span class="skill-bubble">FastAPI</span>
+            <span class="skill-bubble">SQLAlchemy</span>
+            <span class="skill-bubble"><i class="fa-brands fa-node-js text-green-500"></i> Node.js</span>
+            <span class="skill-bubble">Express</span>
+            <span class="skill-bubble">REST APIs</span>
+            <span class="skill-bubble">WebSocket</span>
+            <span class="skill-bubble">JWT / RBAC</span>
+            <span class="skill-bubble">PostgreSQL</span>
+            <span class="skill-bubble">Redis</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div data-animate="fade-up">
+          <div class="flex items-center justify-center gap-2.5 mb-4">
+            <i class="fa-solid fa-palette text-cyan-400 text-lg"></i>
+            <h3 class="text-lg font-bold text-slate-700">Frontend</h3>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2.5">
+            <span class="skill-bubble"><i class="fa-brands fa-react text-cyan-500"></i> React</span>
+            <span class="skill-bubble"><i class="fa-brands fa-vuejs text-green-500"></i> Vue 3</span>
+            <span class="skill-bubble">SvelteKit</span>
+            <span class="skill-bubble">Vite</span>
+            <span class="skill-bubble">TailwindCSS</span>
+            <span class="skill-bubble">Pinia</span>
+            <span class="skill-bubble">ECharts</span>
+            <span class="skill-bubble"><i class="fa-brands fa-html5 text-orange-500"></i> HTML / CSS</span>
+          </div>
+        </div>
+
+        <!-- AI / ML -->
+        <div data-animate="fade-up">
+          <div class="flex items-center justify-center gap-2.5 mb-4">
+            <i class="fa-solid fa-brain text-fuchsia-400 text-lg"></i>
+            <h3 class="text-lg font-bold text-slate-700">AI / ML</h3>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2.5">
+            <span class="skill-bubble">PyTorch</span>
+            <span class="skill-bubble">HuggingFace</span>
+            <span class="skill-bubble">OpenCV</span>
+            <span class="skill-bubble">LangChain</span>
+            <span class="skill-bubble">Scikit-learn</span>
+            <span class="skill-bubble">LLM APIs</span>
+            <span class="skill-bubble">RAG</span>
+            <span class="skill-bubble">ChromaDB</span>
+            <span class="skill-bubble">LoRA</span>
+          </div>
+        </div>
+
+        <!-- Big Data -->
+        <div data-animate="fade-up">
+          <div class="flex items-center justify-center gap-2.5 mb-4">
+            <i class="fa-solid fa-layer-group text-amber-400 text-lg"></i>
+            <h3 class="text-lg font-bold text-slate-700">Big Data</h3>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2.5">
+            <span class="skill-bubble">Apache Spark</span>
+            <span class="skill-bubble">PySpark</span>
+            <span class="skill-bubble">Hadoop</span>
+            <span class="skill-bubble">Hive</span>
+            <span class="skill-bubble">HDFS</span>
+            <span class="skill-bubble">Databricks</span>
+          </div>
+        </div>
+
+        <!-- DevOps -->
+        <div data-animate="fade-up">
+          <div class="flex items-center justify-center gap-2.5 mb-4">
+            <i class="fa-solid fa-gears text-emerald-400 text-lg"></i>
+            <h3 class="text-lg font-bold text-slate-700">DevOps</h3>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2.5">
+            <span class="skill-bubble"><i class="fa-brands fa-docker text-blue-500"></i> Docker</span>
+            <span class="skill-bubble">Kubernetes</span>
+            <span class="skill-bubble"><i class="fa-brands fa-aws text-orange-500"></i> AWS</span>
+            <span class="skill-bubble"><i class="fa-brands fa-microsoft text-blue-500"></i> Azure</span>
+            <span class="skill-bubble"><i class="fa-brands fa-git-alt text-red-500"></i> Git</span>
+            <span class="skill-bubble">CI/CD</span>
+            <span class="skill-bubble"><i class="fa-brands fa-linux text-yellow-500"></i> Linux</span>
+            <span class="skill-bubble">Nginx</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Spoken Languages -->
+      <div class="mt-12 flex flex-wrap justify-center gap-4" data-animate="fade-up">
+        <div class="glass rounded-xl px-5 py-3 flex items-center gap-3 glow-border">
+          <span class="text-xl">🇲🇦</span>
+          <div><p class="text-sm font-semibold text-slate-700">Arabic</p><p class="text-[11px] text-slate-400">Native</p></div>
+        </div>
+        <div class="glass rounded-xl px-5 py-3 flex items-center gap-3 glow-border">
+          <span class="text-xl">🇫🇷</span>
+          <div><p class="text-sm font-semibold text-slate-700">French</p><p class="text-[11px] text-slate-400">Fluent</p></div>
+        </div>
+        <div class="glass rounded-xl px-5 py-3 flex items-center gap-3 glow-border">
+          <span class="text-xl">🇬🇧</span>
+          <div><p class="text-sm font-semibold text-slate-700">English</p><p class="text-[11px] text-slate-400">Fluent</p></div>
+        </div>
+        <div class="glass rounded-xl px-5 py-3 flex items-center gap-3 glow-border">
+          <span class="text-xl">🇨🇳</span>
+          <div><p class="text-sm font-semibold text-slate-700">Chinese</p><p class="text-[11px] text-slate-400">Intermediate (HSK 4)</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       7. PUBLICATIONS
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="publications" class="relative py-24 px-6 overflow-hidden">
+    <div class="blob w-[400px] h-[400px] bg-fuchsia-300/20 -top-20 -left-32" style="animation-delay:1s;"></div>
+    <div class="blob w-[350px] h-[350px] bg-pink-200/25 bottom-10 -right-20" style="animation-delay:3s;"></div>
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-4">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">Publications &amp; <span class="gradient-text">Research</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+        <p class="text-sm text-slate-400 mt-3" data-animate="fade-up">Research conducted at the IDS Lab, Sichuan University</p>
+      </div>
+
+      <!-- ── Tier 1: My Publication ── -->
+      <div class="mt-12" data-animate="fade-up">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-2 h-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500"></div>
+          <span class="text-xs font-bold uppercase tracking-widest text-pink-500">My Publication</span>
+        </div>
+
+        <div class="glass rounded-2xl p-8 sm:p-10 glow-border" data-tilt>
+          <div class="flex items-start gap-4 mb-5">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-file-lines text-white text-2xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-slate-800 leading-tight mb-2">A Demonstration of mLoRA: A Parallelism-Efficient LLM Fine-Tuning System</h3>
+              <p class="text-sm text-slate-500 mb-1">
+                <span class="text-pink-500 font-semibold">Filali, S.</span>, Ye, Z., Li, D., Hu, Z., Lan, T., Sha, J., Zhang, S., Duan, L., Zuo, J., Lu, H., Zhou, Y., &amp; Tang, M.
+              </p>
+              <p class="text-xs text-pink-400 font-mono">Submitted to PVLDB 2025 Demo Track &middot; 2025</p>
+            </div>
+          </div>
+
+          <!-- Description (expandable) -->
+          <div class="mb-5">
+            <p id="abstract-short" class="text-sm text-slate-500 leading-relaxed">
+              This paper demonstrates mLoRA, a system for parallel multi-LoRA LLM fine-tuning. The demo showcases the system on two database-domain tasks &mdash; Text2SQL and LLM4DP &mdash; achieving 30% faster optimization and 4&ndash;5&times; speedup over serial training...
+              <button onclick="toggleAbstract()" class="text-pink-500 hover:text-pink-600 font-medium ml-1 cursor-pointer">show more</button>
+            </p>
+            <p id="abstract-full" class="text-sm text-slate-500 leading-relaxed hidden">
+              This paper demonstrates mLoRA, a system for parallel multi-LoRA LLM fine-tuning. The demo showcases the system on two database-domain tasks &mdash; Text2SQL (parallel hyperparameter search achieving 30% faster optimization) and LLM4DP (4 parallel data preprocessing tasks with 4&ndash;5&times; speedup over serial training). This demo paper extends the full mLoRA research paper published at VLDB 2025. mLoRA introduces two core components: LoRAPP, a zero-bubble pipeline parallelism mechanism that leverages the independence of LoRA adapters to maximize GPU utilization across multiple GPUs, and BatchLoRA, a custom operator that consolidates multiple LoRA tasks into batched matrix operations to reduce kernel launch overhead. The system also includes a memory-aware task scheduler for efficient resource allocation. mLoRA achieves 30&ndash;45% faster training compared to existing parallel methods and has been deployed in production at AntGroup.
+              <button onclick="toggleAbstract()" class="text-pink-500 hover:text-pink-600 font-medium ml-1 cursor-pointer">show less</button>
+            </p>
+          </div>
+
+          <!-- Keywords -->
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">LLM</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">LoRA</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Fine-tuning</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Pipeline Parallelism</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">GPU Optimization</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Distributed Training</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-3">
+            <button onclick="openPdfModal('papers/mlora_demo.pdf', 'mLoRA Demo Paper', 'PVLDB 2025 Demo Track')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:shadow-lg hover:shadow-pink-500/20 transition-all hover:-translate-y-0.5 cursor-pointer">
+              <i class="fa-solid fa-file-pdf"></i> View PDF
+            </button>
+            <a href="https://doi.org/10.5281/zenodo.18827406" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm text-slate-500 glass hover:text-pink-500 hover:border-pink-300 transition-all hover:-translate-y-0.5">
+              <i class="fa-solid fa-link"></i> DOI
+            </a>
+            <a href="https://github.com/TUDB-Labs/mLoRA" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm text-slate-500 glass hover:text-pink-500 hover:border-pink-300 transition-all hover:-translate-y-0.5">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a href="https://youtu.be/m2qMYlFmmfo" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm text-slate-500 glass hover:text-pink-500 hover:border-pink-300 transition-all hover:-translate-y-0.5">
+              <i class="fa-solid fa-video"></i> Demo Video
+            </a>
+          </div>
+
+          <!-- Zenodo DOI Badge -->
+          <div class="mt-5 pt-5 border-t border-white/20">
+            <a href="https://doi.org/10.5281/zenodo.18827406" target="_blank" rel="noopener">
+              <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.18827406.svg" alt="DOI Badge" class="h-5 opacity-70 hover:opacity-100 transition-opacity" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Connector ── -->
+      <div class="flex flex-col items-center my-1" data-animate="fade-up">
+        <div class="w-px h-8 bg-gradient-to-b from-pink-300 to-pink-200"></div>
+        <div class="glass rounded-full px-4 py-1.5 flex items-center gap-2">
+          <i class="fa-solid fa-arrow-up text-pink-400 text-[10px]"></i>
+          <span class="text-[11px] font-semibold text-pink-400 uppercase tracking-wider">Extends</span>
+        </div>
+        <div class="w-px h-8 bg-gradient-to-b from-pink-200 to-pink-100"></div>
+      </div>
+
+      <!-- ── Tier 2: Related Lab Research ── -->
+      <div data-animate="fade-up">
+        <div class="flex items-center gap-2 mb-4 ml-4 sm:ml-8">
+          <div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+          <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Related Lab Research &mdash; IDS Lab, Sichuan University</span>
+        </div>
+
+        <div class="glass rounded-2xl p-6 sm:p-8 glow-border ml-4 sm:ml-8" style="background:rgba(255,255,255,0.25);">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-slate-400 to-slate-500 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-book-open text-white text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-slate-700 leading-tight mb-1">An Efficient Multi-Task LoRA-Serving System for Large Language Models</h3>
+              <p class="text-xs text-slate-400 font-mono">VLDB 2025 &middot; Proceedings of the VLDB Endowment</p>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-500 leading-relaxed mb-5">
+            Published by the IDS Lab team. This is the full research paper behind the mLoRA system &mdash; the same project and codebase I contributed to as a research engineer. My demo paper above extends this work.
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <button onclick="openPdfModal('papers/2312.02515v2.pdf', 'mLoRA Full Research Paper', 'VLDB 2025')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:shadow-lg hover:shadow-slate-500/20 transition-all hover:-translate-y-0.5 cursor-pointer">
+              <i class="fa-solid fa-file-pdf"></i> View PDF
+            </button>
+            <a href="https://doi.org/10.14778/3725688.3725718" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-slate-500 glass hover:text-pink-500 hover:border-pink-300 transition-all hover:-translate-y-0.5">
+              <i class="fa-solid fa-book"></i> DOI
+            </a>
+            <a href="https://github.com/TUDB-Labs/mLoRA" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-slate-500 glass hover:text-pink-500 hover:border-pink-300 transition-all hover:-translate-y-0.5">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PDF Viewer Modal -->
+  <div id="pdf-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 scale-95" style="background:rgba(0,0,0,0.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
+    <div class="glass rounded-3xl w-full max-w-5xl relative flex flex-col" style="height:90vh;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.5);box-shadow:0 32px 64px rgba(236,72,153,0.12);">
+      <!-- Toolbar -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/20 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center">
+            <i class="fa-solid fa-file-pdf text-white text-sm"></i>
+          </div>
+          <div>
+            <p id="pdf-modal-title" class="text-sm font-bold text-slate-700">mLoRA Demo Paper</p>
+            <p id="pdf-modal-subtitle" class="text-[11px] text-slate-400">PVLDB 2025 Demo Track</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="pdf-modal-download" href="papers/mlora_demo.pdf" download class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-500 glass hover:text-pink-500 transition-colors">
+            <i class="fa-solid fa-download mr-1"></i> Download
+          </a>
+          <button onclick="closePdfModal()" class="w-9 h-9 rounded-full glass flex items-center justify-center text-slate-500 hover:text-pink-500 transition-colors" aria-label="Close">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+      <!-- PDF Content -->
+      <div class="flex-1 overflow-hidden rounded-b-3xl">
+        <iframe id="pdf-iframe" class="w-full h-full border-0" style="background:#f5f0f3;"></iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       7b. MEDIUM ARTICLES
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="articles" class="relative py-16 px-6 overflow-hidden">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800" data-animate="fade-up">Latest <span class="gradient-text">Articles</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6" data-animate="fade-up">
+        <!-- Article 1 -->
+        <a href="MEDIUM_ARTICLE_1_URL" target="_blank" rel="noopener" class="glass rounded-2xl p-6 glow-border block group">
+          <div class="flex items-center gap-2 mb-3">
+            <i class="fa-brands fa-medium text-slate-400"></i>
+            <span class="text-xs text-slate-400 font-mono">Medium</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-800 mb-2 group-hover:text-pink-500 transition-colors">What I've Built: AI Surveillance, Legal RAG, Distributed LLM Training, and Recruitment Platforms</h3>
+          <p class="text-sm text-slate-500 leading-relaxed mb-3">A walkthrough of the production systems I've designed and shipped &mdash; from 500-camera real-time analytics to multi-tenant SaaS recruitment...</p>
+          <span class="text-sm font-medium text-pink-500">Read on Medium <i class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
+        </a>
+
+        <!-- Article 2 -->
+        <a href="MEDIUM_ARTICLE_2_URL" target="_blank" rel="noopener" class="glass rounded-2xl p-6 glow-border block group">
+          <div class="flex items-center gap-2 mb-3">
+            <i class="fa-brands fa-medium text-slate-400"></i>
+            <span class="text-xs text-slate-400 font-mono">Medium</span>
+          </div>
+          <h3 class="text-base font-bold text-slate-800 mb-2 group-hover:text-pink-500 transition-colors">How mLoRA Makes LLM Fine-Tuning 30&ndash;45% Faster</h3>
+          <p class="text-sm text-slate-500 leading-relaxed mb-3">Deep-dive into LoRAPP pipeline parallelism, BatchLoRA operator fusion, and the memory-aware scheduler behind our VLDB 2025 system...</p>
+          <span class="text-sm font-medium text-pink-500">Read on Medium <i class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       8. CONTACT
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="contact" class="relative py-24 px-6 bg-gradient-to-b from-[#efe8ec] to-transparent overflow-hidden">
+    <div class="blob w-[400px] h-[400px] bg-purple-300/25 -top-20 -right-32" style="animation-delay:2.5s;"></div>
+    <div class="blob w-[350px] h-[350px] bg-pink-300/20 bottom-0 -left-20" style="animation-delay:4.5s;"></div>
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">Let's <span class="gradient-text">Connect</span></h2>
+        <div class="section-line" data-animate="fade-up"></div>
+        <p class="text-slate-500 mt-4 max-w-lg mx-auto" data-animate="fade-up">
+          Interested in collaborating or have a question? Drop me a message — I'm always open to new opportunities.
+        </p>
+      </div>
+
+      <!-- Social Links Row -->
+      <div class="flex flex-wrap justify-center gap-4 mb-14" data-animate="fade-up">
+        <a href="mailto:Salmaf99o@gmail.com" class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border group hover:-translate-y-1 transition-all duration-300">
+          <i class="fa-solid fa-envelope text-slate-400 group-hover:text-pink-500 transition-colors"></i>
+          <span class="text-sm font-medium text-slate-700">Salmaf99o@gmail.com</span>
+        </a>
+        <a href="https://github.com/saf9933" target="_blank" rel="noopener" class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border group hover:-translate-y-1 transition-all duration-300">
+          <i class="fa-brands fa-github text-slate-400 group-hover:text-pink-500 transition-colors"></i>
+          <span class="text-sm font-medium text-slate-700">saf9933</span>
+        </a>
+        <a href="https://www.linkedin.com/in/salma-filali-5b5b572b6/" target="_blank" rel="noopener" class="glass rounded-2xl px-6 py-4 flex items-center gap-3 glow-border group hover:-translate-y-1 transition-all duration-300">
+          <i class="fa-brands fa-linkedin-in text-slate-400 group-hover:text-pink-500 transition-colors"></i>
+          <span class="text-sm font-medium text-slate-700">Salma Filali</span>
+        </a>
+        <div class="glass rounded-2xl px-6 py-4 flex items-center gap-3">
+          <i class="fa-solid fa-location-dot text-slate-400"></i>
+          <span class="text-sm font-medium text-slate-700">Morocco / Australia</span>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div data-animate="fade-up">
+        <form id="contact-form" class="glass rounded-2xl p-8 sm:p-10 max-w-2xl mx-auto">
+          <div class="grid sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Name</label>
+              <input type="text" id="name" name="name" required
+                class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all focus:border-pink-300 focus:bg-white/50"
+                placeholder="Your name" />
+            </div>
+            <div>
+              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Email</label>
+              <input type="email" id="email" name="email" required
+                class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all focus:border-pink-300 focus:bg-white/50"
+                placeholder="your@email.com" />
+            </div>
+          </div>
+          <div class="mb-5">
+            <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Subject</label>
+            <input type="text" id="subject" name="subject" required
+              class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all focus:border-pink-300 focus:bg-white/50"
+              placeholder="Project collaboration" />
+          </div>
+          <div class="mb-6">
+            <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Message</label>
+            <textarea id="message" name="message" rows="5" required
+              class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all resize-none focus:border-pink-300 focus:bg-white/50"
+              placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit"
+            class="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-0.5">
+            Send Message <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       9. FOOTER
+       ════════════════════════════════════════════════════════════════ -->
+  <footer class="border-t border-pink-100 py-8 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-500">
+        &copy; 2026 Salma Filali. Built with <span class="text-pink-400">&hearts;</span> and code.
+      </p>
+      <div class="flex gap-4">
+        <a href="https://github.com/saf9933" target="_blank" rel="noopener" class="text-slate-400 hover:text-pink-500 transition-colors" aria-label="GitHub">
+          <i class="fa-brands fa-github text-lg"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/salma-filali-5b5b572b6/" target="_blank" rel="noopener" class="text-slate-400 hover:text-pink-500 transition-colors" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in text-lg"></i>
+        </a>
+        <a href="mailto:Salmaf99o@gmail.com" class="text-slate-400 hover:text-pink-500 transition-colors" aria-label="Email">
+          <i class="fa-solid fa-envelope text-lg"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SCRIPTS
+       ════════════════════════════════════════════════════════════════ -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <!-- Vanilla Tilt -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    /* ── 1. Cursor Glow ── */
+    if (!isTouchDevice) {
+      const glow = document.getElementById('cursor-glow');
+      document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    } else {
+      const glow = document.getElementById('cursor-glow');
+      if (glow) glow.style.display = 'none';
+    }
+
+    /* ── 2. Navbar ── */
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('glass');
+        navbar.style.background = '';
+        navbar.querySelector('div').classList.remove('h-20');
+        navbar.querySelector('div').classList.add('h-16');
+      } else {
+        navbar.classList.remove('glass');
+        navbar.style.background = 'transparent';
+        navbar.querySelector('div').classList.add('h-20');
+        navbar.querySelector('div').classList.remove('h-16');
+      }
+    });
+
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.style.maxHeight = menuOpen ? mobileMenu.scrollHeight + 'px' : '0';
+      bar1.style.transform = menuOpen ? 'rotate(45deg) translate(4px, 4px)' : '';
+      bar2.style.opacity = menuOpen ? '0' : '1';
+      bar3.style.transform = menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : '';
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu.style.maxHeight = '0';
+        bar1.style.transform = '';
+        bar2.style.opacity = '1';
+        bar3.style.transform = '';
+      });
+    });
+
+    // Active section highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (window.scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    /* ── 3. Scroll Progress Bar ── */
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      progressBar.style.transform = 'scaleX(' + progress + ')';
+    });
+
+    /* ── 4. Hero Animations ── */
+    if (!prefersReducedMotion) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Split text reveal for hero name
+      const heroName = document.getElementById('hero-name');
+      const nameHTML = heroName.innerHTML;
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = nameHTML;
+
+      let charIndex = 0;
+      const processNode = (node) => {
+        if (node.nodeType === 3) {
+          // Text node
+          const chars = node.textContent.split('');
+          const fragment = document.createDocumentFragment();
+          chars.forEach(char => {
+            const span = document.createElement('span');
+            span.className = 'char-reveal';
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.animationDelay = (charIndex * 0.04) + 's';
+            fragment.appendChild(span);
+            charIndex++;
+          });
+          return fragment;
+        } else if (node.nodeType === 1) {
+          const clone = node.cloneNode(false);
+          Array.from(node.childNodes).forEach(child => {
+            clone.appendChild(processNode(child));
+          });
+          return clone;
+        }
+        return node.cloneNode(true);
+      };
+
+      const newContent = document.createDocumentFragment();
+      Array.from(tempDiv.childNodes).forEach(node => {
+        newContent.appendChild(processNode(node));
+      });
+      heroName.innerHTML = '';
+      heroName.appendChild(newContent);
+
+      // Animate chars
+      gsap.to('.char-reveal', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.03,
+        ease: 'back.out(1.7)',
+        delay: 0.3,
+      });
+
+      // Typed.js for roles
+      new Typed('#typed-roles', {
+        strings: [
+          'Full Stack Engineer',
+          'AI/ML Engineer',
+          'Project Lead',
+          'Systems Engineer',
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+      });
+
+      /* ── 5. Floating Code Snippets ── */
+      const codeSnippets = [
+        'const model = await load("bert")',
+        'def train(epochs=100):',
+        'SELECT * FROM insights',
+        'docker-compose up -d',
+        'git push origin main',
+        'pip install transformers',
+        'npm run build',
+        'kubectl apply -f deploy.yaml',
+        'import torch.nn as nn',
+        'from sklearn import metrics',
+      ];
+      const container = document.getElementById('floating-code-container');
+      codeSnippets.forEach((snippet, i) => {
+        const el = document.createElement('div');
+        el.className = 'floating-code';
+        el.textContent = snippet;
+        el.style.top = (Math.random() * 80 + 5) + '%';
+        el.style.left = (Math.random() * 85 + 5) + '%';
+        el.style.animationDelay = (i * 0.8) + 's';
+        el.style.animationDuration = (5 + Math.random() * 4) + 's';
+        container.appendChild(el);
+      });
+
+      /* ── 6. Generic Scroll Animations ── */
+      document.querySelectorAll('[data-animate]').forEach(el => {
+        // Skip project cards — they have their own stagger animation
+        if (el.classList.contains('project-card')) return;
+        const type = el.getAttribute('data-animate');
+        let fromVars = { opacity: 0, duration: 0.8, ease: 'power2.out' };
+
+        switch (type) {
+          case 'fade-up':    fromVars.y = 40; break;
+          case 'fade-down':  fromVars.y = -40; break;
+          case 'fade-left':  fromVars.x = -40; break;
+          case 'fade-right': fromVars.x = 40; break;
+          case 'scale':      fromVars.scale = 0.8; break;
+        }
+
+        gsap.from(el, {
+          ...fromVars,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+      /* ── 7. Vanilla Tilt ── */
+      if (!isTouchDevice && window.innerWidth > 640) {
+        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+          max: 8,
+          speed: 400,
+          glare: true,
+          'max-glare': 0.1,
+          gyroscope: false,
+        });
+      }
+
+      /* ── 8. Skill Cards Stagger ── */
+      document.querySelectorAll('.skill-card').forEach((card, i) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 40,
+          scale: 0.95,
+          duration: 0.6,
+          delay: i * 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+      /* ── 9. Timeline Line Growth ── */
+      const timelineFill = document.getElementById('timeline-fill');
+      const timeline = document.getElementById('timeline');
+      if (timelineFill && timeline) {
+        gsap.to(timelineFill, {
+          height: '100%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: timeline,
+            start: 'top 60%',
+            end: 'bottom 40%',
+            scrub: 1,
+          },
+        });
+      }
+
+      /* ── 10. Project Cards — individual ScrollTrigger per card ── */
+      document.querySelectorAll('#projects-grid > .project-card').forEach((card, i) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 50,
+          rotateY: 4,
+          duration: 0.8,
+          delay: i * 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+    } else {
+      // Reduced motion — just show typed text statically
+      document.getElementById('typed-roles').textContent = 'Software & AI Engineer';
+      // Make all hidden elements visible
+      document.querySelectorAll('.char-reveal').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }
+
+    /* ── Project Modal System ── */
+    const projectDetails = [
+      {
+        title: 'ARA-3 — Applicant Tracking System',
+        gradient: 'from-pink-500 via-purple-500 to-indigo-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">A complete recruitment management platform I designed, developed, and deployed end-to-end as sole developer &mdash; from database schema to production deployment. Three-layer architecture: FastAPI async backend, React + Vite frontend, and a Node.js WhatsApp relay microservice. In production, used by 3 organizations.</p>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Zero-Touch Automated Pipeline</h4>
+          <p class="text-sm text-slate-500 mb-3">The core of ARA-3 &mdash; a fully automated hiring pipeline that requires no human intervention:</p>
+          <div class="glass rounded-xl p-4 mb-5">
+            <div class="text-sm text-slate-500 space-y-1">
+              <p><strong class="text-slate-700">1.</strong> CV received via email (IMAP/POP3), WhatsApp, Google Drive, or careers page</p>
+              <p><strong class="text-slate-700">2.</strong> Text extracted from PDF/DOCX &rarr; parsed into structured data (skills, experience, education)</p>
+              <p><strong class="text-slate-700">3.</strong> Auto-categorized into one of 15 CV categories (bilingual keyword matching)</p>
+              <p><strong class="text-slate-700">4.</strong> Auto-matched to open jobs (&ge;25% skill overlap, token-aware to avoid false positives)</p>
+              <p><strong class="text-slate-700">5.</strong> Quality scored: ATS rules (40%) + LLM semantic analysis (60%) &rarr; grade A+ to D</p>
+              <p><strong class="text-slate-700">6.</strong> Candidates above threshold auto-receive a branded test invitation email with unique link</p>
+              <p><strong class="text-slate-700">7.</strong> AI-proctored timed assessment (face/gaze/object/audio monitoring, auto-graded)</p>
+              <p><strong class="text-slate-700">8.</strong> Top-K qualifying profiles compiled and emailed to the recruiter &mdash; ready for interview</p>
+            </div>
+          </div>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Key Features</h4>
+          <ul class="text-sm text-slate-500 space-y-2 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">AI-Powered CV Scoring:</strong> Dual-engine system &mdash; ATS rule engine (keyword density, section completeness, experience matching) + LLM analysis. Provider-agnostic: supports Ollama (local), OpenAI, Azure OpenAI, Anthropic, and Gemini. Recruiters can rescore with custom instructions.</li>
+            <li><strong class="text-slate-700">Real-Time Video Proctoring:</strong> Client-side monitoring using MediaPipe FaceMesh (468 landmarks + iris tracking), COCO-SSD object detection (phone/book/laptop), facial action unit emotion analysis, Eye Aspect Ratio blink detection, saccade tracking, drowsiness detection, audio level monitoring, and movement tracking. Generates violation reports with timestamped screenshots. Configurable per difficulty level (beginner to expert).</li>
+            <li><strong class="text-slate-700">Multi-Channel CV Ingestion:</strong> Email (IMAP/POP3 with background polling), WhatsApp Business API + WhatsApp Web.js (Node.js relay microservice with QR pairing), Google Drive public folder scanning, and a fully customizable public careers page. Deduplication by email across all channels.</li>
+            <li><strong class="text-slate-700">LinkedIn Integration:</strong> OAuth2 flow for LinkedIn Share API &mdash; jobs are posted directly to LinkedIn with formatted descriptions. Also supports Selenium-based automation as fallback.</li>
+            <li><strong class="text-slate-700">Customizable Careers Page:</strong> Per-organization branding &mdash; logo, colors, company info, job listings &mdash; with a public application form that feeds directly into the automated pipeline.</li>
+            <li><strong class="text-slate-700">8-Stage Pipeline Board:</strong> Drag-and-drop Kanban (Applied &rarr; Screening &rarr; Video Interview &rarr; Phone Interview &rarr; Onsite &rarr; Offer &rarr; Hired / Rejected). Automatic stage transitions, interview scheduling with calendar sync, and rejection email workflows.</li>
+            <li><strong class="text-slate-700">Smart Matching:</strong> Token-aware skill comparison that prevents false positives (e.g. &ldquo;C&rdquo; won&rsquo;t match &ldquo;C#&rdquo;). Configurable thresholds and top-K limiting per job. Per-channel sourcing controls.</li>
+            <li><strong class="text-slate-700">Security:</strong> JWT + refresh token rotation, Argon2id password hashing (bcrypt legacy fallback), Fernet encryption for stored credentials, rate limiting (slowapi), LLM prompt injection defense (15+ pattern detectors), magic byte file validation, security headers middleware, and RBAC (admin/recruiter/headhunter).</li>
+            <li><strong class="text-slate-700">Internationalization:</strong> Full i18n in French, English, and Arabic with RTL layout support. Branded email templates in all three languages.</li>
+          </ul>
+
+          <div class="glass rounded-xl p-4">
+            <p class="text-sm font-semibold text-slate-700 mb-1">Scale</p>
+            <p class="text-sm text-slate-500">~170 source files &middot; 80+ API endpoints &middot; 12 migration scripts &middot; 26 frontend service modules &middot; 3 background workers &middot; Built solo &middot; 3 organizations in production</p>
+          </div>
+        `
+      },
+      {
+        title: 'Qanoun Portal — AI Legal Technology Platform',
+        gradient: 'from-purple-500 via-indigo-500 to-blue-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">Self-hosted AI legal platform built entirely around <strong class="text-slate-700">Moroccan legislation</strong> — Dahirs, laws, decrees, and legal codes. Built for Wineo AI's clients: law firms, legal departments, and solo practitioners in Morocco and the francophone market. 7 integrated modules covering the full legal workflow from research to contract delivery.</p>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Contract Generation (Flagship)</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">TipTap rich-text editor</strong> with tables, attachments, voice dictation, and placeholder highlighting</li>
+            <li><strong class="text-slate-700">AI sidebar:</strong> review clauses, generate missing sections, improve language — with full document context</li>
+            <li><strong class="text-slate-700">Template system:</strong> Moroccan contract templates by category (employment, commercial, real-estate), upload as text/LaTeX/PDF with auto-extraction</li>
+            <li><strong class="text-slate-700">Export:</strong> PDF, Word/DOCX, Markdown</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">AI Legal Chat</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Dual specialized modes:</strong> Legal Opinion (structured analysis grounded in Moroccan law) and Legal Research (deep search across Moroccan jurisprudence &amp; statutes)</li>
+            <li><strong class="text-slate-700">Multi-model:</strong> Ollama local models, OpenAI, or any OpenAI-compatible API — chat with different LLMs simultaneously</li>
+            <li>File analysis, web search, image generation, code execution, voice/video overlay</li>
+            <li>Markdown + LaTeX rendering, code highlighting, citation display from RAG</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Knowledge Base &amp; RAG</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li>Ingestion optimized for Moroccan legal documents (Dahirs, laws, decrees) — normalizes document-specific formatting</li>
+            <li>Hierarchy-aware chunking that preserves article/section/subsection context</li>
+            <li>Vector DB: ChromaDB (default), Milvus, Qdrant, Elasticsearch, or Pinecone</li>
+            <li>Cite specific article numbers and official text references in responses</li>
+            <li>Inject documents via <code>#</code> tag in chat; attach knowledge bases to specific models</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Billing &amp; Admin</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Credit-based billing</strong> in Moroccan Dirhams — 2M words/month, interactive top-up slider (1 DH = 4,760 words)</li>
+            <li><strong class="text-slate-700">Admin panel:</strong> user/group management, SCIM 2.0 (Okta/Azure AD), analytics dashboard, model evaluations</li>
+            <li><strong class="text-slate-700">Custom functions:</strong> deploy Python functions callable by AI during chat (tool use)</li>
+            <li><strong class="text-slate-700">Workspace:</strong> model configs, reusable prompt templates, tool servers (MCP protocol)</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Architecture</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Frontend:</strong> SvelteKit + TypeScript, TailwindCSS, Socket.io real-time, PWA with offline support, 58 locales</li>
+            <li><strong class="text-slate-700">Backend:</strong> Python FastAPI, SQLAlchemy + Alembic, SQLite/PostgreSQL, Redis caching</li>
+            <li><strong class="text-slate-700">Auth:</strong> JWT + OAuth (Google, GitHub, Microsoft) + LDAP + API keys, granular RBAC</li>
+            <li><strong class="text-slate-700">Deploy:</strong> Docker, Kubernetes (Helm chart + Kustomize), GPU/CUDA for local inference, full offline mode</li>
+          </ul>
+        `
+      },
+      {
+        title: 'mLoRA — Distributed LLM Fine-Tuning System',
+        gradient: 'from-indigo-500 via-blue-500 to-cyan-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">mLoRA solves the problem of efficiently training many LoRA adapters simultaneously across distributed GPUs.</p>
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Core System Components</h4>
+          <ul class="text-sm text-slate-500 space-y-2 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">LoRAPP (LoRA-aware Pipeline Parallelism):</strong> Exploits independence between LoRA adapters during training. When GPU K+1 runs backward pass for adapter i, GPU K simultaneously processes forward pass for adapter j — zero-bubble execution.</li>
+            <li><strong class="text-slate-700">BatchLoRA:</strong> Consolidates multiple small LoRA parameter matrices into a single large matrix for batched multiplication. Eliminates K-1 redundant base weight computations per step.</li>
+            <li><strong class="text-slate-700">Memory-Aware Scheduler:</strong> Non-linear least squares fitting to model memory footprint per task configuration. Maximizes concurrent tasks without OOM.</li>
+          </ul>
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">My Contributions</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li>Co-authored demo paper (PVLDB 2025 Demo Track)</li>
+            <li>Built Text2SQL demo: parallel hyperparameter search with real-time GPU monitoring</li>
+            <li>Built LLM4DP demo: 4 parallel data preprocessing tasks — 4–5× speedup over serial</li>
+            <li>Optimized PyTorch pipelines (+35% throughput)</li>
+            <li>Improved GPU scheduling (−20% execution time)</li>
+          </ul>
+          <div class="glass rounded-xl p-4">
+            <p class="text-sm font-semibold text-slate-700 mb-1">Results</p>
+            <p class="text-sm text-slate-500">30–45% faster than FSDP/TP. 4–5× over serial. Deployed at AntGroup. VLDB 2025.</p>
+          </div>
+        `
+      },
+      {
+        title: '庐山博物馆AI视频中台 — Lushan Museum AI Video Platform',
+        gradient: 'from-cyan-500 via-teal-500 to-green-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">Full-stack enterprise platform for intelligent video surveillance and AI-powered security at the Lushan Museum. Built to protect cultural heritage assets through real-time threat detection, multi-stream video monitoring, and automated alert workflows.</p>
+
+          <div class="rounded-xl overflow-hidden mb-6">
+            <video controls playsinline class="w-full rounded-xl" poster="">
+              <source src="assets/images/Surveilance_compressed.mp4" type="video/mp4">
+            </video>
+            <p class="text-xs text-slate-400 mt-2 text-center">Platform demo — multi-stream monitoring, AI detection &amp; alert workflows</p>
+          </div>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Backend — Python FastAPI</h4>
+          <ul class="text-sm text-slate-500 space-y-2 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">66 REST API endpoints</strong> + WebSocket real-time communication</li>
+            <li><strong class="text-slate-700">Async database layer:</strong> PostgreSQL 16, SQLAlchemy 2.0 (async ORM), Alembic migrations</li>
+            <li><strong class="text-slate-700">Auth &amp; RBAC:</strong> JWT with refresh tokens, bcrypt password hashing, 32-permission system (resource:action format)</li>
+            <li><strong class="text-slate-700">12 backend services:</strong> auth, user management, alert center, event center, video center, algorithm management, task management, system settings, homepage analytics, notifications, WebSocket</li>
+            <li><strong class="text-slate-700">Redis integration:</strong> Session caching, sliding-window rate limiting, pub/sub real-time updates</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Frontend — Vue 3 + TypeScript</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li>Pinia state management, Tailwind CSS styling</li>
+            <li>ECharts &amp; Chart.js data visualization</li>
+            <li>Headless UI components</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Key Features</h4>
+          <ul class="text-sm text-slate-500 space-y-2 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Multi-stream monitoring:</strong> RTSP camera access with 1/4/9/16 grid layouts and PTZ control</li>
+            <li><strong class="text-slate-700">6 AI detection types:</strong> intrusion, abnormal behavior, crowd gathering, perimeter protection, face recognition, abandoned object detection</li>
+            <li><strong class="text-slate-700">Alert lifecycle:</strong> detect &rarr; acknowledge &rarr; process &rarr; resolve, all in real-time</li>
+            <li><strong class="text-slate-700">Dashboards:</strong> Region heatmaps, trend analysis, device health monitoring</li>
+            <li><strong class="text-slate-700">User hierarchy:</strong> Department-based with role-based access control</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Infrastructure</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 list-disc list-inside">
+            <li>Docker Compose: API + PostgreSQL + Redis + Nginx reverse proxy</li>
+          </ul>
+        `
+      },
+      {
+        title: 'BizFinder — Big Data Business Discovery App',
+        gradient: 'from-amber-500 via-orange-500 to-pink-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">Full-stack business finder application powered by the Yelp dataset (2+ TB), combining a big data processing pipeline with a native iOS client. Built during internship at SunCaper Data Co., Chengdu.</p>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Data Pipeline</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Ingestion &amp; Storage:</strong> End-to-end ETL workflow using Hadoop (HDFS + MapReduce) for data ingestion and partitioning, MySQL for structured storage with normalization and indexing.</li>
+            <li><strong class="text-slate-700">Analytics:</strong> Apache Spark (RDDs, Spark SQL, Spark MLlib) for user behavior analysis, business performance metrics, and sentiment analysis on reviews.</li>
+            <li><strong class="text-slate-700">Visualization:</strong> Analysis outputs transformed into bar charts, heatmaps, and interactive maps surfaced directly in the app UI.</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">iOS Application</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Business search</strong> with personalized recommendations driven by Spark analysis results</li>
+            <li><strong class="text-slate-700">Interactive map display</strong> via MapKit with business locations and proximity-based suggestions</li>
+            <li><strong class="text-slate-700">Business detail pages</strong> with hours, ratings, and review history</li>
+            <li><strong class="text-slate-700">User review submission</strong> and photo uploads</li>
+            <li><strong class="text-slate-700">Customizable settings</strong> &mdash; filters, language, accessibility options</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Impact</h4>
+          <p class="text-sm text-slate-500">Received positive user feedback for the integration of ML-driven recommendations into a clean, intuitive mobile interface. Tackled performance bottlenecks through parallel processing, caching, and algorithmic optimization across the pipeline.</p>
+        `
+      },
+      {
+        title: 'MedPredict — AI Medical Education Platform',
+        gradient: 'from-pink-500 via-rose-400 to-purple-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">Built as an undergraduate thesis at Sichuan University, College of Software Engineering. An interactive web platform helping medical students prepare for USMLE, NEET-PG, and AIIMS exams — combining a fine-tuned biomedical language model with 5 integrated learning modules.</p>
+
+          <div class="rounded-xl overflow-hidden mb-6">
+            <video controls playsinline class="w-full rounded-xl" poster="">
+              <source src="assets/images/Medpredict_compressed.mp4" type="video/mp4">
+            </video>
+            <p class="text-xs text-slate-400 mt-2 text-center">Platform demo — MCQ classifier, flashcard generator, symptom checker &amp; clinical case simulator</p>
+          </div>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">The Model: Fine-Tuned PubMedBERT</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li>Base: <strong class="text-slate-700">PubMedBERT</strong> (110M params) — pretrained on PubMed abstracts, biomedical-native vocabulary</li>
+            <li>Fine-tuned on <strong class="text-slate-700">MedMCQA</strong> (194K+ real medical exam questions, 21 subjects, 4-way classification)</li>
+            <li>Test accuracy: <strong class="text-slate-700">42.7–46.3%</strong> (vs. 40% zero-shot baseline, 60% human passing threshold)</li>
+            <li>Well-calibrated confidence scores: &gt;85% confidence = ~91% correct; &lt;60% confidence = ~25% accuracy</li>
+            <li>Trained on Google Colab Pro (T4 GPU), 3–5 epochs, AdamW, FP16 mixed precision</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">5 Learning Modules</h4>
+          <ul class="text-sm text-slate-500 space-y-2 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">MCQ Classifier:</strong> Enter any 4-option medical question → get prediction, confidence bars across all choices, difficulty rating (Easy/Medium/Hard), and response timing. All sessions exportable as CSV/JSON.</li>
+            <li><strong class="text-slate-700">Flashcard Generator:</strong> Paste term;definition pairs → interactive flip-card UI with timed review, round-based progression, and memorization tracking. Per-card interaction logging via Sequelize.</li>
+            <li><strong class="text-slate-700">Symptom Checker:</strong> Natural language input with synonym normalization + fuzzy matching (85% threshold). Top 3 conditions ranked by confidence with precautionary advice.</li>
+            <li><strong class="text-slate-700">Clinical Case Simulator:</strong> Step through multi-stage branching clinical scenarios. On completion, full decision timeline sent to LLM (Mistral 7B via OpenRouter) for personalized clinical reasoning feedback.</li>
+            <li><strong class="text-slate-700">Textbook Search &amp; RAG:</strong> Upload medical PDFs &rarr; hybrid retrieval (BM25 + dense embeddings via all-MiniLM-L6-v2, merged with Reciprocal Rank Fusion) &rarr; Mistral-7B generates answers with source citations. Auto-generates 5 MCQs from textbook content.</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Architecture</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Frontend:</strong> Vue 3 (Composition + Options API) with Vue CLI + Babel</li>
+            <li><strong class="text-slate-700">Backend:</strong> Node.js/Express — 19 REST endpoints, Joi validation, JWT auth, rate limiting</li>
+            <li><strong class="text-slate-700">ML Bridge:</strong> Python scripts via child_process.spawn (JSON in/out contract)</li>
+            <li><strong class="text-slate-700">Database:</strong> SQLite via Sequelize ORM — 12 tables (sessions, responses, flashcard interactions, simulation runs, API logs)</li>
+            <li><strong class="text-slate-700">External AI:</strong> OpenRouter API (Mistral 7B Instruct) for RAG answers and clinical case feedback</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">User Testing</h4>
+          <p class="text-sm text-slate-500 mb-5">Tested with real medical students under supervision of <strong class="text-slate-700">Professor Said Makani</strong> (cardiothoracic surgeon, Hôpital Universitaire International Cheikh Khalifa Ibn Zaid, Morocco). Students reported it was more engaging than existing tools, with zero incorrect predictions on well-structured questions. Flashcard generator and confidence-aware MCQ feedback received strongest praise.</p>
+
+          <div class="glass rounded-xl p-4">
+            <p class="text-sm font-semibold text-slate-700 mb-1">Model Comparison Context</p>
+            <div class="text-sm text-slate-500 space-y-1">
+              <p>PubMedBERT zero-shot: ~40% &middot; <strong class="text-pink-500">MedPredict: 42.7–46.3%</strong> &middot; GPT-3.5: ~60% &middot; Med-PaLM 2: 72.3%</p>
+              <p class="text-xs text-slate-400 mt-1">Single 110M-param encoder, no retrieval, no chain-of-thought, no ensembling — designed for educational use on consumer hardware.</p>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    window.openProjectModal = function(index) {
+      const project = projectDetails[index];
+      const modal = document.getElementById('project-modal');
+      const content = document.getElementById('project-modal-content');
+      content.innerHTML = '<div class="bg-gradient-to-r ' + project.gradient + ' -mx-8 sm:-mx-10 -mt-8 sm:-mt-10 px-8 sm:px-10 py-6 mb-8 rounded-t-3xl"><h3 class="text-xl font-bold text-white">' + project.title + '</h3></div>' + project.content;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeProjectModal = function() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    };
+
+    // Close modal on backdrop click
+    document.getElementById('project-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeProjectModal();
+    });
+
+    // Close modal on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeProjectModal(); closePdfModal(); }
+    });
+
+    /* ── PDF Modal ── */
+    window.openPdfModal = function(pdfPath, title, subtitle) {
+      const modal = document.getElementById('pdf-modal');
+      const iframe = document.getElementById('pdf-iframe');
+      document.getElementById('pdf-modal-title').textContent = title || 'Paper';
+      document.getElementById('pdf-modal-subtitle').textContent = subtitle || '';
+      document.getElementById('pdf-modal-download').href = pdfPath;
+      iframe.src = pdfPath;
+      modal.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closePdfModal = function() {
+      const modal = document.getElementById('pdf-modal');
+      const iframe = document.getElementById('pdf-iframe');
+      modal.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    };
+
+    document.getElementById('pdf-modal').addEventListener('click', function(e) {
+      if (e.target === this) closePdfModal();
+    });
+
+    /* ── Abstract Toggle ── */
+    window.toggleAbstract = function() {
+      const short = document.getElementById('abstract-short');
+      const full = document.getElementById('abstract-full');
+      short.classList.toggle('hidden');
+      full.classList.toggle('hidden');
+    };
+
+    /* ── Contact Form (basic UI feedback) ── */
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Message Sent!';
+      btn.classList.remove('from-pink-500', 'via-purple-500', 'to-indigo-500');
+      btn.classList.add('from-green-500', 'to-emerald-500');
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.add('from-pink-500', 'via-purple-500', 'to-indigo-500');
+        btn.classList.remove('from-green-500', 'to-emerald-500');
+        form.reset();
+      }, 3000);
+    });
+
+    /* ══════════════════════════════════════════════════════════════
+       GITHUB CONTRIBUTIONS — Dynamic graph with year tabs
+       ══════════════════════════════════════════════════════════════ */
+    (function initGitHubContributions() {
+      var GH_USER = 'saf9933';
+      var API_BASE = 'https://github-contributions-api.jogruber.de/v4/';
+      var LEVEL_COLORS = ['#f5f0f3', '#fce7f3', '#f9a8d4', '#ec4899', '#be185d', '#831843'];
+      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var currentYear = new Date().getFullYear();
+      var years = [];
+      for (var y = currentYear; y >= 2024; y--) years.push(y);
+
+      // Tooltip element
+      var tooltip = document.createElement('div');
+      tooltip.className = 'gh-tooltip';
+      document.body.appendChild(tooltip);
+
+      // Build year tabs
+      var tabsContainer = document.getElementById('gh-year-tabs');
+      years.forEach(function (year, i) {
+        var btn = document.createElement('button');
+        btn.className = 'gh-year-btn' + (i === 0 ? ' active' : '');
+        btn.textContent = year;
+        btn.addEventListener('click', function () {
+          tabsContainer.querySelectorAll('.gh-year-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          loadYear(year);
+        });
+        tabsContainer.appendChild(btn);
+      });
+
+      function loadYear(year) {
+        var graphEl = document.getElementById('gh-graph');
+        graphEl.innerHTML = '<div class="text-sm text-slate-400 text-center py-10">Loading contributions...</div>';
+        document.getElementById('gh-total-count').textContent = '';
+
+        fetch(API_BASE + GH_USER + '?y=' + year)
+          .then(function (r) {
+            if (!r.ok) throw new Error('API error');
+            return r.json();
+          })
+          .then(function (data) {
+            var contributions = data.contributions || [];
+            var total = 0;
+            var dateMap = {};
+            contributions.forEach(function (c) {
+              dateMap[c.date] = c;
+              total += c.count;
+            });
+
+            document.getElementById('gh-total-count').textContent = total + ' contributions in ' + year;
+            renderGraph(graphEl, dateMap, year);
+          })
+          .catch(function () {
+            graphEl.innerHTML = '<div class="text-sm text-slate-400 text-center py-10">Could not load contribution data</div>';
+          });
+      }
+
+      function renderGraph(container, dateMap, year) {
+        container.innerHTML = '';
+
+        // Current year: Jan 1 → today. Past years: Jan 1 → Dec 31.
+        var isCurrentYear = year === currentYear;
+        var startDate = new Date(year, 0, 1);
+        var endDate = isCurrentYear ? new Date() : new Date(year, 11, 31);
+
+        // Align start to Sunday
+        var dayOfWeek = startDate.getDay();
+        if (dayOfWeek !== 0) {
+          startDate.setDate(startDate.getDate() - dayOfWeek);
+        }
+
+        // Date boundaries as strings for clean comparison
+        var yearStart = year + '-01-01';
+        var yearEnd = endDate.getFullYear() + '-' + String(endDate.getMonth() + 1).padStart(2, '0') + '-' + String(endDate.getDate()).padStart(2, '0');
+
+        // Build weeks
+        var weeks = [];
+        var d = new Date(startDate);
+        while (d <= endDate) {
+          var week = [];
+          for (var i = 0; i < 7; i++) {
+            var dateStr = d.getFullYear() + '-' +
+              String(d.getMonth() + 1).padStart(2, '0') + '-' +
+              String(d.getDate()).padStart(2, '0');
+            var inRange = dateStr >= yearStart && dateStr <= yearEnd;
+            week.push({
+              date: dateStr,
+              count: dateMap[dateStr] ? dateMap[dateStr].count : 0,
+              level: dateMap[dateStr] ? dateMap[dateStr].level : 0,
+              inRange: inRange
+            });
+            d.setDate(d.getDate() + 1);
+          }
+          weeks.push(week);
+        }
+
+        // Month labels
+        var monthRow = document.createElement('div');
+        monthRow.className = 'gh-month-labels';
+        var lastMonth = -1;
+        weeks.forEach(function (week) {
+          var firstDay = week.find(function (c) { return c.inRange; });
+          var span = document.createElement('span');
+          span.style.width = '11px';
+          span.style.flexShrink = '0';
+          if (firstDay) {
+            var month = parseInt(firstDay.date.split('-')[1], 10) - 1;
+            if (month !== lastMonth) {
+              span.textContent = MONTHS[month];
+              span.style.width = 'auto';
+              span.style.minWidth = '11px';
+              lastMonth = month;
+            }
+          }
+          monthRow.appendChild(span);
+        });
+        container.appendChild(monthRow);
+
+        // Grid wrapper (day labels + cells)
+        var wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+
+        // Day labels
+        var dayLabels = document.createElement('div');
+        dayLabels.className = 'gh-day-labels';
+        for (var di = 0; di < 7; di++) {
+          var lbl = document.createElement('span');
+          lbl.textContent = (di === 1 || di === 3 || di === 5) ? DAYS[di] : '';
+          dayLabels.appendChild(lbl);
+        }
+        wrapper.appendChild(dayLabels);
+
+        // Grid columns (weeks)
+        var grid = document.createElement('div');
+        grid.className = 'gh-grid';
+
+        weeks.forEach(function (week) {
+          var col = document.createElement('div');
+          col.className = 'gh-col';
+          week.forEach(function (cell) {
+            var el = document.createElement('div');
+            el.className = 'gh-cell';
+            if (cell.inRange) {
+              var lvl = Math.min(cell.level, 4);
+              el.style.background = LEVEL_COLORS[lvl + 1];
+              el.setAttribute('data-date', cell.date);
+              el.setAttribute('data-count', cell.count);
+              el.addEventListener('mouseenter', function (e) {
+                var count = this.getAttribute('data-count');
+                var date = this.getAttribute('data-date');
+                var parts = date.split('-');
+                var formatted = MONTHS[parseInt(parts[1], 10) - 1] + ' ' + parseInt(parts[2], 10) + ', ' + parts[0];
+                tooltip.textContent = (count === '0' ? 'No' : count) + ' contribution' + (count === '1' ? '' : 's') + ' on ' + formatted;
+                tooltip.style.opacity = '1';
+                var rect = this.getBoundingClientRect();
+                tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
+                tooltip.style.top = (rect.top - 32) + 'px';
+              });
+              el.addEventListener('mouseleave', function () {
+                tooltip.style.opacity = '0';
+              });
+            } else {
+              el.style.background = 'transparent';
+            }
+            col.appendChild(el);
+          });
+          grid.appendChild(col);
+        });
+
+        wrapper.appendChild(grid);
+        container.appendChild(wrapper);
+      }
+
+      // Load the current year on page load
+      loadYear(currentYear);
+    })();
+
+    /* ══════════════════════════════════════════════════════════════
+       CODE SHOWCASE — Auto-typing code editor
+       ══════════════════════════════════════════════════════════════ */
+    (function initCodeShowcase() {
+      var codeBody = document.getElementById('code-body');
+      var codeTabs = document.getElementById('code-tabs');
+      var codeLabel = document.getElementById('code-label');
+      if (!codeBody || !codeTabs) return;
+
+      var snippets = [
+        {
+          tab: 'mlora_engine.py',
+          project: 'mLoRA',
+          desc: 'Distributed LLM fine-tuning — VLDB 2025',
+          lines: [
+            ['<span class="syn-cmt"># mLoRA: Pipeline-parallel multi-LoRA fine-tuning</span>'],
+            ['<span class="syn-kw">import</span> torch'],
+            ['<span class="syn-kw">from</span> mlora.pipeline <span class="syn-kw">import</span> <span class="syn-fn">LoRAPPScheduler</span>'],
+            ['<span class="syn-kw">from</span> mlora.operators <span class="syn-kw">import</span> <span class="syn-fn">BatchLoRAFusion</span>'],
+            [''],
+            ['<span class="syn-type">@torch.no_grad</span><span class="syn-op">()</span>'],
+            ['<span class="syn-kw">class</span> <span class="syn-type">DistributedLoRATrainer</span><span class="syn-op">:</span>'],
+            ['    <span class="syn-kw">def</span> <span class="syn-fn">__init__</span><span class="syn-op">(</span><span class="syn-self">self</span><span class="syn-op">,</span> <span class="syn-param">base_model</span><span class="syn-op">,</span> <span class="syn-param">num_adapters</span><span class="syn-op">=</span><span class="syn-num">8</span><span class="syn-op">):</span>'],
+            ['        <span class="syn-self">self</span><span class="syn-op">.</span>model <span class="syn-op">=</span> base_model'],
+            ['        <span class="syn-self">self</span><span class="syn-op">.</span>scheduler <span class="syn-op">=</span> <span class="syn-fn">LoRAPPScheduler</span><span class="syn-op">(</span><span class="syn-param">num_stages</span><span class="syn-op">=</span><span class="syn-num">4</span><span class="syn-op">)</span>'],
+            ['        <span class="syn-self">self</span><span class="syn-op">.</span>fusion <span class="syn-op">=</span> <span class="syn-fn">BatchLoRAFusion</span><span class="syn-op">(</span><span class="syn-param">num_adapters</span><span class="syn-op">)</span>'],
+            [''],
+            ['    <span class="syn-kw">def</span> <span class="syn-fn">train_step</span><span class="syn-op">(</span><span class="syn-self">self</span><span class="syn-op">,</span> <span class="syn-param">batch</span><span class="syn-op">):</span>'],
+            ['        <span class="syn-cmt"># Fuse multiple LoRA adapters → 35% throughput gain</span>'],
+            ['        fused <span class="syn-op">=</span> <span class="syn-self">self</span><span class="syn-op">.</span>fusion<span class="syn-op">.</span><span class="syn-fn">forward</span><span class="syn-op">(</span>batch<span class="syn-op">.</span>adapters<span class="syn-op">)</span>'],
+            ['        logits <span class="syn-op">=</span> <span class="syn-self">self</span><span class="syn-op">.</span>model<span class="syn-op">(</span>batch<span class="syn-op">.</span>input_ids<span class="syn-op">,</span> <span class="syn-param">lora_weights</span><span class="syn-op">=</span>fused<span class="syn-op">)</span>'],
+            ['        loss <span class="syn-op">=</span> <span class="syn-self">self</span><span class="syn-op">.</span>scheduler<span class="syn-op">.</span><span class="syn-fn">compute_loss</span><span class="syn-op">(</span>logits<span class="syn-op">,</span> batch<span class="syn-op">.</span>labels<span class="syn-op">)</span>'],
+            ['        <span class="syn-kw">return</span> loss'],
+          ]
+        },
+        {
+          tab: 'auth_service.py',
+          project: 'Lushan Museum',
+          desc: 'JWT auth &amp; 32-permission RBAC — FastAPI',
+          lines: [
+            ['<span class="syn-cmt"># 庐山博物馆AI视频中台 — Authentication service</span>'],
+            ['<span class="syn-kw">import</span> hashlib'],
+            ['<span class="syn-kw">from</span> datetime <span class="syn-kw">import</span> datetime<span class="syn-op">,</span> timedelta<span class="syn-op">,</span> timezone'],
+            ['<span class="syn-kw">from</span> sqlalchemy <span class="syn-kw">import</span> select'],
+            ['<span class="syn-kw">from</span> sqlalchemy.ext.asyncio <span class="syn-kw">import</span> <span class="syn-type">AsyncSession</span>'],
+            ['<span class="syn-kw">from</span> sqlalchemy.orm <span class="syn-kw">import</span> <span class="syn-fn">selectinload</span>'],
+            ['<span class="syn-kw">from</span> app.core.security <span class="syn-kw">import</span> <span class="syn-fn">create_access_token</span><span class="syn-op">,</span> <span class="syn-fn">verify_password</span>'],
+            [''],
+            ['<span class="syn-kw">async def</span> <span class="syn-fn">authenticate</span><span class="syn-op">(</span><span class="syn-param">db</span><span class="syn-op">:</span> <span class="syn-type">AsyncSession</span><span class="syn-op">,</span> <span class="syn-param">username</span><span class="syn-op">:</span> <span class="syn-type">str</span><span class="syn-op">,</span> <span class="syn-param">password</span><span class="syn-op">:</span> <span class="syn-type">str</span><span class="syn-op">):</span>'],
+            ['    stmt <span class="syn-op">=</span> <span class="syn-op">(</span>'],
+            ['        <span class="syn-fn">select</span><span class="syn-op">(</span><span class="syn-type">User</span><span class="syn-op">)</span>'],
+            ['        <span class="syn-op">.</span><span class="syn-fn">where</span><span class="syn-op">(</span><span class="syn-type">User</span><span class="syn-op">.</span>username <span class="syn-op">==</span> username<span class="syn-op">)</span>'],
+            ['        <span class="syn-op">.</span><span class="syn-fn">options</span><span class="syn-op">(</span><span class="syn-fn">selectinload</span><span class="syn-op">(</span><span class="syn-type">User</span><span class="syn-op">.</span>roles<span class="syn-op">).</span><span class="syn-fn">selectinload</span><span class="syn-op">(</span><span class="syn-type">Role</span><span class="syn-op">.</span>permissions<span class="syn-op">))</span>'],
+            ['    <span class="syn-op">)</span>'],
+            ['    result <span class="syn-op">=</span> <span class="syn-kw">await</span> db<span class="syn-op">.</span><span class="syn-fn">execute</span><span class="syn-op">(</span>stmt<span class="syn-op">)</span>'],
+            ['    user <span class="syn-op">=</span> result<span class="syn-op">.</span><span class="syn-fn">scalar_one_or_none</span><span class="syn-op">()</span>'],
+            [''],
+            ['    <span class="syn-kw">if not</span> <span class="syn-fn">verify_password</span><span class="syn-op">(</span>password<span class="syn-op">,</span> user<span class="syn-op">.</span>password_hash<span class="syn-op">):</span>'],
+            ['        user<span class="syn-op">.</span>failed_login_attempts <span class="syn-op">+=</span> <span class="syn-num">1</span>'],
+            ['        <span class="syn-kw">raise</span> <span class="syn-type">AuthenticationError</span><span class="syn-op">(</span><span class="syn-str">"Invalid credentials"</span><span class="syn-op">)</span>'],
+            ['    <span class="syn-cmt"># JWT + refresh token rotation</span>'],
+            ['    <span class="syn-kw">return await</span> <span class="syn-fn">create_tokens</span><span class="syn-op">(</span>db<span class="syn-op">,</span> user<span class="syn-op">)</span>'],
+          ]
+        },
+        {
+          tab: 'quality_score.py',
+          project: 'ARA-3',
+          desc: 'CV quality scoring — ATS + LLM hybrid analysis',
+          lines: [
+            ['<span class="syn-cmt"># ARA-3: Combined ATS rule-based + LLM CV scoring</span>'],
+            ['<span class="syn-kw">from</span> fastapi <span class="syn-kw">import</span> <span class="syn-type">APIRouter</span><span class="syn-op">,</span> <span class="syn-type">Depends</span>'],
+            ['<span class="syn-kw">from</span> app.core.prompt_sanitization <span class="syn-kw">import</span> <span class="syn-op">(</span>'],
+            ['    <span class="syn-fn">sanitize_resume_text</span><span class="syn-op">,</span> <span class="syn-fn">sanitize_job_description</span>'],
+            ['<span class="syn-op">)</span>'],
+            [''],
+            ['<span class="syn-kw">class</span> <span class="syn-type">LLMScoringService</span><span class="syn-op">:</span>'],
+            ['    <span class="syn-kw">async def</span> <span class="syn-fn">analyze_cv_job_match</span><span class="syn-op">(</span><span class="syn-self">self</span><span class="syn-op">,</span> <span class="syn-param">resume</span><span class="syn-op">,</span> <span class="syn-param">job_data</span><span class="syn-op">,</span> <span class="syn-param">instructions</span><span class="syn-op">=</span><span class="syn-num">None</span><span class="syn-op">):</span>'],
+            ['        <span class="syn-kw">if</span> <span class="syn-self">self</span><span class="syn-op">.</span><span class="syn-fn">_is_configured</span><span class="syn-op">():</span>'],
+            ['            <span class="syn-kw">return await</span> <span class="syn-self">self</span><span class="syn-op">.</span><span class="syn-fn">_call_llm_api</span><span class="syn-op">(</span>resume<span class="syn-op">,</span> job_data<span class="syn-op">,</span> instructions<span class="syn-op">)</span>'],
+            ['        <span class="syn-kw">return</span> <span class="syn-self">self</span><span class="syn-op">.</span><span class="syn-fn">_placeholder_scoring</span><span class="syn-op">(</span>resume<span class="syn-op">,</span> job_data<span class="syn-op">)</span>'],
+            [''],
+            ['<span class="syn-type">@router.get</span><span class="syn-op">(</span><span class="syn-str">"/score/{candidate_id}/{job_id}"</span><span class="syn-op">)</span>'],
+            ['<span class="syn-kw">async def</span> <span class="syn-fn">get_quality_score</span><span class="syn-op">(</span><span class="syn-param">candidate_id</span><span class="syn-op">,</span> <span class="syn-param">job_id</span><span class="syn-op">):</span>'],
+            ['    ats_result <span class="syn-op">=</span> <span class="syn-fn">ATSRuleEngine</span><span class="syn-op">(</span>resume<span class="syn-op">,</span> job_data<span class="syn-op">).</span><span class="syn-fn">calculate_all_scores</span><span class="syn-op">()</span>'],
+            ['    llm_result <span class="syn-op">=</span> <span class="syn-kw">await</span> llm<span class="syn-op">.</span><span class="syn-fn">analyze_cv_job_match</span><span class="syn-op">(</span>resume<span class="syn-op">,</span> job_data<span class="syn-op">)</span>'],
+            ['    <span class="syn-cmt"># ATS: 40% + LLM: 60% → combined quality grade</span>'],
+            ['    combined <span class="syn-op">=</span> <span class="syn-op">(</span>ats_overall <span class="syn-op">*</span> <span class="syn-num">0.4</span><span class="syn-op">)</span> <span class="syn-op">+</span> <span class="syn-op">(</span>llm_overall <span class="syn-op">*</span> <span class="syn-num">0.6</span><span class="syn-op">)</span>'],
+            ['    grade <span class="syn-op">=</span> <span class="syn-str">"A+"</span> <span class="syn-kw">if</span> combined <span class="syn-op">&gt;=</span> <span class="syn-num">85</span> <span class="syn-kw">else</span> <span class="syn-str">"A"</span> <span class="syn-kw">if</span> combined <span class="syn-op">&gt;=</span> <span class="syn-num">75</span> <span class="syn-kw">else</span> <span class="syn-str">"B"</span>'],
+          ]
+        },
+        {
+          tab: 'useVideoMonitoring.js',
+          project: 'ARA-3',
+          desc: 'Real-time video proctoring — FaceMesh + COCO-SSD',
+          lines: [
+            ['<span class="syn-cmt">// Enterprise video surveillance: face/gaze/object/audio</span>'],
+            ['<span class="syn-kw">import</span> <span class="syn-op">{</span> FaceMesh <span class="syn-op">}</span> <span class="syn-kw">from</span> <span class="syn-str">\'@mediapipe/face_mesh\'</span>'],
+            ['<span class="syn-kw">import</span> <span class="syn-op">*</span> <span class="syn-kw">as</span> cocoSsd <span class="syn-kw">from</span> <span class="syn-str">\'@tensorflow-models/coco-ssd\'</span>'],
+            [''],
+            ['<span class="syn-kw">const</span> <span class="syn-fn">calculateGazeDirection</span> <span class="syn-op">= (</span><span class="syn-param">landmarks</span><span class="syn-op">) =&gt; {</span>'],
+            ['    <span class="syn-kw">const</span> leftIris <span class="syn-op">=</span> landmarks<span class="syn-op">[</span><span class="syn-num">468</span><span class="syn-op">]</span>  <span class="syn-cmt">// iris center</span>'],
+            ['    <span class="syn-kw">const</span> rightIris <span class="syn-op">=</span> landmarks<span class="syn-op">[</span><span class="syn-num">473</span><span class="syn-op">]</span>'],
+            ['    <span class="syn-kw">const</span> headTilt <span class="syn-op">=</span> noseTip<span class="syn-op">.</span>x <span class="syn-op">-</span> noseBase<span class="syn-op">.</span>x'],
+            ['    <span class="syn-kw">const</span> adjusted <span class="syn-op">=</span> avgHorizontalRatio <span class="syn-op">-</span> headTilt <span class="syn-op">*</span> <span class="syn-num">2</span>'],
+            ['    <span class="syn-kw">return</span> <span class="syn-op">{</span> direction<span class="syn-op">,</span> gazeX<span class="syn-op">,</span> gazeY<span class="syn-op">,</span> isViolation <span class="syn-op">}</span>'],
+            ['<span class="syn-op">}</span>'],
+            [''],
+            ['<span class="syn-cmt">// Eye Aspect Ratio (Soukupova &amp; Cech 2016)</span>'],
+            ['<span class="syn-kw">const</span> <span class="syn-fn">calculateEAR</span> <span class="syn-op">= (</span><span class="syn-param">landmarks</span><span class="syn-op">) =&gt; {</span>'],
+            ['    <span class="syn-kw">const</span> leftEAR <span class="syn-op">=</span> <span class="syn-op">(</span><span class="syn-fn">dist</span><span class="syn-op">(</span>lP2<span class="syn-op">,</span>lP3<span class="syn-op">)</span> <span class="syn-op">+</span> <span class="syn-fn">dist</span><span class="syn-op">(</span>lP5<span class="syn-op">,</span>lP6<span class="syn-op">))</span> <span class="syn-op">/</span> <span class="syn-op">(</span><span class="syn-num">2</span> <span class="syn-op">*</span> <span class="syn-fn">dist</span><span class="syn-op">(</span>lP1<span class="syn-op">,</span>lP4<span class="syn-op">))</span>'],
+            ['    <span class="syn-kw">return</span> <span class="syn-op">{</span> leftEAR<span class="syn-op">,</span> rightEAR<span class="syn-op">,</span> <span class="syn-param">avgEAR</span><span class="syn-op">:</span> <span class="syn-op">(</span>leftEAR <span class="syn-op">+</span> rightEAR<span class="syn-op">)</span> <span class="syn-op">/</span> <span class="syn-num">2</span> <span class="syn-op">}</span>'],
+            ['<span class="syn-op">}</span>'],
+            [''],
+            ['<span class="syn-cmt">// Forbidden objects: phone, book, laptop, remote</span>'],
+            ['<span class="syn-kw">const</span> predictions <span class="syn-op">=</span> <span class="syn-kw">await</span> cocoModel<span class="syn-op">.</span><span class="syn-fn">detect</span><span class="syn-op">(</span>video<span class="syn-op">)</span>'],
+            ['<span class="syn-kw">const</span> forbidden <span class="syn-op">=</span> predictions<span class="syn-op">.</span><span class="syn-fn">filter</span><span class="syn-op">(</span>p <span class="syn-op">=&gt;</span> FORBIDDEN<span class="syn-op">.</span><span class="syn-fn">includes</span><span class="syn-op">(</span>p<span class="syn-op">.</span>class<span class="syn-op">))</span>'],
+          ]
+        },
+        {
+          tab: 'socket.py',
+          project: 'Qanoun',
+          desc: 'Real-time WebSocket — Redis sessions + Yjs collab',
+          lines: [
+            ['<span class="syn-cmt"># Qanoun: Real-time WebSocket with Redis session pools</span>'],
+            ['<span class="syn-kw">import</span> socketio'],
+            ['<span class="syn-kw">from</span> redis <span class="syn-kw">import</span> asyncio <span class="syn-kw">as</span> aioredis'],
+            ['<span class="syn-kw">import</span> pycrdt <span class="syn-kw">as</span> Y'],
+            ['<span class="syn-kw">from</span> open_webui.socket.utils <span class="syn-kw">import</span> <span class="syn-fn">RedisDict</span><span class="syn-op">,</span> <span class="syn-fn">RedisLock</span><span class="syn-op">,</span> <span class="syn-fn">YdocManager</span>'],
+            [''],
+            ['SESSION_POOL <span class="syn-op">=</span> <span class="syn-fn">RedisDict</span><span class="syn-op">(</span><span class="syn-str">f"{REDIS_KEY_PREFIX}:session_pool"</span><span class="syn-op">)</span>'],
+            ['USER_POOL <span class="syn-op">=</span> <span class="syn-fn">RedisDict</span><span class="syn-op">(</span><span class="syn-str">f"{REDIS_KEY_PREFIX}:user_pool"</span><span class="syn-op">)</span>'],
+            ['YDOC_MANAGER <span class="syn-op">=</span> <span class="syn-fn">YdocManager</span><span class="syn-op">(</span><span class="syn-param">redis</span><span class="syn-op">=</span>REDIS<span class="syn-op">)</span>'],
+            [''],
+            ['<span class="syn-kw">@</span>sio<span class="syn-op">.</span><span class="syn-fn">on</span><span class="syn-op">(</span><span class="syn-str">"ydoc:document:join"</span><span class="syn-op">)</span>'],
+            ['<span class="syn-kw">async def</span> <span class="syn-fn">ydoc_document_join</span><span class="syn-op">(</span><span class="syn-param">sid</span><span class="syn-op">,</span> <span class="syn-param">data</span><span class="syn-op">):</span>'],
+            ['    <span class="syn-kw">await</span> YDOC_MANAGER<span class="syn-op">.</span><span class="syn-fn">add_user</span><span class="syn-op">(</span><span class="syn-param">document_id</span><span class="syn-op">=</span>document_id<span class="syn-op">,</span> <span class="syn-param">user_id</span><span class="syn-op">=</span>sid<span class="syn-op">)</span>'],
+            ['    <span class="syn-kw">await</span> sio<span class="syn-op">.</span><span class="syn-fn">enter_room</span><span class="syn-op">(</span>sid<span class="syn-op">,</span> <span class="syn-str">f"doc_{document_id}"</span><span class="syn-op">)</span>'],
+            ['    ydoc <span class="syn-op">=</span> Y<span class="syn-op">.</span><span class="syn-fn">Doc</span><span class="syn-op">()</span>'],
+            ['    <span class="syn-kw">for</span> update <span class="syn-kw">in</span> <span class="syn-kw">await</span> YDOC_MANAGER<span class="syn-op">.</span><span class="syn-fn">get_updates</span><span class="syn-op">(</span>document_id<span class="syn-op">):</span>'],
+            ['        ydoc<span class="syn-op">.</span><span class="syn-fn">apply_update</span><span class="syn-op">(</span><span class="syn-fn">bytes</span><span class="syn-op">(</span>update<span class="syn-op">))</span>'],
+            ['    state_update <span class="syn-op">=</span> ydoc<span class="syn-op">.</span><span class="syn-fn">get_update</span><span class="syn-op">()</span>'],
+            ['    <span class="syn-kw">await</span> sio<span class="syn-op">.</span><span class="syn-fn">emit</span><span class="syn-op">(</span><span class="syn-str">"ydoc:document:state"</span><span class="syn-op">,</span> <span class="syn-op">{</span><span class="syn-str">"state"</span><span class="syn-op">:</span> <span class="syn-fn">list</span><span class="syn-op">(</span>state_update<span class="syn-op">)},</span> <span class="syn-param">room</span><span class="syn-op">=</span>sid<span class="syn-op">)</span>'],
+          ]
+        },
+        {
+          tab: 'retrieval.py',
+          project: 'Qanoun',
+          desc: 'RAG pipeline — hybrid search + vector DB + reranking',
+          lines: [
+            ['<span class="syn-cmt"># Qanoun: Document ingestion + hybrid RAG retrieval</span>'],
+            ['<span class="syn-kw">from</span> langchain.text_splitter <span class="syn-kw">import</span> <span class="syn-fn">RecursiveCharacterTextSplitter</span>'],
+            ['<span class="syn-kw">from</span> open_webui.retrieval.vector.factory <span class="syn-kw">import</span> VECTOR_DB_CLIENT'],
+            ['<span class="syn-kw">from</span> sentence_transformers <span class="syn-kw">import</span> <span class="syn-fn">SentenceTransformer</span><span class="syn-op">,</span> <span class="syn-fn">CrossEncoder</span>'],
+            [''],
+            ['<span class="syn-kw">def</span> <span class="syn-fn">save_docs_to_vector_db</span><span class="syn-op">(</span><span class="syn-param">request</span><span class="syn-op">,</span> <span class="syn-param">docs</span><span class="syn-op">,</span> <span class="syn-param">collection_name</span><span class="syn-op">):</span>'],
+            ['    splitter <span class="syn-op">=</span> <span class="syn-fn">RecursiveCharacterTextSplitter</span><span class="syn-op">(</span>'],
+            ['        <span class="syn-param">chunk_size</span><span class="syn-op">=</span>config<span class="syn-op">.</span>CHUNK_SIZE<span class="syn-op">,</span> <span class="syn-param">chunk_overlap</span><span class="syn-op">=</span>config<span class="syn-op">.</span>CHUNK_OVERLAP<span class="syn-op">)</span>'],
+            ['    docs <span class="syn-op">=</span> splitter<span class="syn-op">.</span><span class="syn-fn">split_documents</span><span class="syn-op">(</span>docs<span class="syn-op">)</span>'],
+            ['    embeddings <span class="syn-op">=</span> <span class="syn-fn">embedding_function</span><span class="syn-op">(</span>'],
+            ['        <span class="syn-op">[</span>t<span class="syn-op">.</span><span class="syn-fn">replace</span><span class="syn-op">(</span><span class="syn-str">"\\n"</span><span class="syn-op">,</span> <span class="syn-str">" "</span><span class="syn-op">)</span> <span class="syn-kw">for</span> t <span class="syn-kw">in</span> texts<span class="syn-op">],</span>'],
+            ['        <span class="syn-param">prefix</span><span class="syn-op">=</span>RAG_EMBEDDING_CONTENT_PREFIX<span class="syn-op">)</span>'],
+            ['    items <span class="syn-op">=</span> <span class="syn-op">[{</span><span class="syn-str">"id"</span><span class="syn-op">:</span> <span class="syn-fn">uuid4</span><span class="syn-op">(),</span> <span class="syn-str">"text"</span><span class="syn-op">:</span> t<span class="syn-op">,</span> <span class="syn-str">"vector"</span><span class="syn-op">:</span> e<span class="syn-op">,</span> <span class="syn-str">"metadata"</span><span class="syn-op">:</span> m<span class="syn-op">}</span>'],
+            ['        <span class="syn-kw">for</span> t<span class="syn-op">,</span> e<span class="syn-op">,</span> m <span class="syn-kw">in</span> <span class="syn-fn">zip</span><span class="syn-op">(</span>texts<span class="syn-op">,</span> embeddings<span class="syn-op">,</span> metadatas<span class="syn-op">)]</span>'],
+            ['    VECTOR_DB_CLIENT<span class="syn-op">.</span><span class="syn-fn">insert</span><span class="syn-op">(</span><span class="syn-param">collection_name</span><span class="syn-op">=</span>collection_name<span class="syn-op">,</span> <span class="syn-param">items</span><span class="syn-op">=</span>items<span class="syn-op">)</span>'],
+            [''],
+            ['<span class="syn-cmt"># Hybrid search: BM25 sparse + dense + CrossEncoder reranking</span>'],
+            ['<span class="syn-kw">def</span> <span class="syn-fn">query_collection_with_hybrid_search</span><span class="syn-op">(</span><span class="syn-param">collection_names</span><span class="syn-op">,</span> <span class="syn-param">queries</span><span class="syn-op">):</span>'],
+            ['    <span class="syn-kw">return</span> <span class="syn-fn">query_collection</span><span class="syn-op">(</span><span class="syn-param">embedding_function</span><span class="syn-op">=</span>ef<span class="syn-op">,</span> <span class="syn-param">reranking_function</span><span class="syn-op">=</span>rf<span class="syn-op">)</span>'],
+          ]
+        },
+        {
+          tab: 'train.py',
+          project: 'MedPredict',
+          desc: 'PubMedBERT fine-tuning on MedMCQA',
+          lines: [
+            ['<span class="syn-cmt"># MedPredict: Fine-tune PubMedBERT on 194K medical MCQs</span>'],
+            ['<span class="syn-kw">from</span> datasets <span class="syn-kw">import</span> <span class="syn-type">Dataset</span>'],
+            ['<span class="syn-kw">from</span> transformers <span class="syn-kw">import</span> <span class="syn-op">(</span>'],
+            ['    <span class="syn-type">Trainer</span><span class="syn-op">,</span> <span class="syn-type">TrainingArguments</span><span class="syn-op">,</span>'],
+            ['    <span class="syn-fn">AutoTokenizer</span><span class="syn-op">,</span> <span class="syn-fn">AutoModelForSequenceClassification</span>'],
+            ['<span class="syn-op">)</span>'],
+            ['<span class="syn-kw">from</span> sklearn.metrics <span class="syn-kw">import</span> <span class="syn-fn">accuracy_score</span><span class="syn-op">,</span> <span class="syn-fn">f1_score</span>'],
+            [''],
+            ['model <span class="syn-op">=</span> <span class="syn-fn">AutoModelForSequenceClassification</span><span class="syn-op">.</span><span class="syn-fn">from_pretrained</span><span class="syn-op">(</span>'],
+            ['    <span class="syn-str">"models/pubmedbert"</span><span class="syn-op">,</span> <span class="syn-param">num_labels</span><span class="syn-op">=</span><span class="syn-num">4</span>'],
+            ['<span class="syn-op">)</span>'],
+            [''],
+            ['args <span class="syn-op">=</span> <span class="syn-fn">TrainingArguments</span><span class="syn-op">(</span>'],
+            ['    <span class="syn-param">learning_rate</span><span class="syn-op">=</span><span class="syn-num">2e-5</span><span class="syn-op">,</span>'],
+            ['    <span class="syn-param">num_train_epochs</span><span class="syn-op">=</span><span class="syn-num">3</span><span class="syn-op">,</span>'],
+            ['    <span class="syn-param">per_device_train_batch_size</span><span class="syn-op">=</span><span class="syn-num">8</span><span class="syn-op">,</span>'],
+            ['    <span class="syn-param">metric_for_best_model</span><span class="syn-op">=</span><span class="syn-str">"accuracy"</span><span class="syn-op">,</span>'],
+            ['    <span class="syn-param">load_best_model_at_end</span><span class="syn-op">=</span><span class="syn-num">True</span>'],
+            ['<span class="syn-op">)</span>'],
+            [''],
+            ['trainer <span class="syn-op">=</span> <span class="syn-fn">Trainer</span><span class="syn-op">(</span><span class="syn-param">model</span><span class="syn-op">=</span>model<span class="syn-op">,</span> <span class="syn-param">args</span><span class="syn-op">=</span>args<span class="syn-op">,</span> <span class="syn-param">compute_metrics</span><span class="syn-op">=</span>compute_metrics<span class="syn-op">)</span>'],
+            ['trainer<span class="syn-op">.</span><span class="syn-fn">train</span><span class="syn-op">()</span>'],
+          ]
+        },
+        {
+          tab: 'mcq_inferrer.py',
+          project: 'MedPredict',
+          desc: 'MCQ classifier with attention maps',
+          lines: [
+            ['<span class="syn-cmt"># MCQ inference — attention-weighted predictions</span>'],
+            ['<span class="syn-kw">import</span> torch'],
+            ['<span class="syn-kw">from</span> transformers <span class="syn-kw">import</span> <span class="syn-fn">AutoTokenizer</span><span class="syn-op">,</span> <span class="syn-fn">AutoModelForSequenceClassification</span>'],
+            [''],
+            ['<span class="syn-kw">def</span> <span class="syn-fn">predict</span><span class="syn-op">(</span><span class="syn-param">question</span><span class="syn-op">,</span> <span class="syn-param">choices</span><span class="syn-op">,</span> <span class="syn-param">include_attention</span><span class="syn-op">=</span><span class="syn-num">False</span><span class="syn-op">):</span>'],
+            ['    input_text <span class="syn-op">=</span> <span class="syn-str">f"{question}\\nA. {choices[0]}\\nB. {choices[1]}"</span>'],
+            ['    inputs <span class="syn-op">=</span> <span class="syn-fn">tokenizer</span><span class="syn-op">(</span>input_text<span class="syn-op">,</span> <span class="syn-param">return_tensors</span><span class="syn-op">=</span><span class="syn-str">"pt"</span><span class="syn-op">,</span> <span class="syn-param">max_length</span><span class="syn-op">=</span><span class="syn-num">256</span><span class="syn-op">)</span>'],
+            [''],
+            ['    <span class="syn-kw">with</span> torch<span class="syn-op">.</span><span class="syn-fn">no_grad</span><span class="syn-op">():</span>'],
+            ['        outputs <span class="syn-op">=</span> <span class="syn-fn">model</span><span class="syn-op">(</span><span class="syn-op">**</span>inputs<span class="syn-op">,</span> <span class="syn-param">output_attentions</span><span class="syn-op">=</span>include_attention<span class="syn-op">)</span>'],
+            ['        probs <span class="syn-op">=</span> torch<span class="syn-op">.</span><span class="syn-fn">softmax</span><span class="syn-op">(</span>outputs<span class="syn-op">.</span>logits<span class="syn-op">,</span> <span class="syn-param">dim</span><span class="syn-op">=</span><span class="syn-num">-1</span><span class="syn-op">)[</span><span class="syn-num">0</span><span class="syn-op">]</span>'],
+            [''],
+            ['    pred_idx <span class="syn-op">=</span> torch<span class="syn-op">.</span><span class="syn-fn">argmax</span><span class="syn-op">(</span>probs<span class="syn-op">).</span><span class="syn-fn">item</span><span class="syn-op">()</span>'],
+            ['    confidence <span class="syn-op">=</span> probs<span class="syn-op">[</span>pred_idx<span class="syn-op">].</span><span class="syn-fn">item</span><span class="syn-op">()</span>'],
+            ['    <span class="syn-cmt"># CLS attention → token importance heatmap</span>'],
+            ['    difficulty <span class="syn-op">=</span> <span class="syn-str">"Easy"</span> <span class="syn-kw">if</span> confidence <span class="syn-op">&gt;</span> <span class="syn-num">0.9</span> <span class="syn-kw">else</span> <span class="syn-str">"Hard"</span>'],
+            ['    <span class="syn-kw">return</span> pred_idx<span class="syn-op">,</span> confidence<span class="syn-op">,</span> difficulty'],
+          ]
+        },
+        {
+          tab: 'rag.js',
+          project: 'MedPredict',
+          desc: 'BM25 + dense vector hybrid RAG search',
+          lines: [
+            ['<span class="syn-cmt">// Hybrid RAG: BM25 sparse + dense via Reciprocal Rank Fusion</span>'],
+            ['<span class="syn-kw">const</span> <span class="syn-op">{</span> pipeline <span class="syn-op">}</span> <span class="syn-op">=</span> <span class="syn-kw">await</span> <span class="syn-fn">import</span><span class="syn-op">(</span><span class="syn-str">"@xenova/transformers"</span><span class="syn-op">)</span>'],
+            [''],
+            ['<span class="syn-kw">function</span> <span class="syn-fn">buildBM25Index</span><span class="syn-op">(</span><span class="syn-param">chunks</span><span class="syn-op">) {</span>'],
+            ['    <span class="syn-kw">const</span> N <span class="syn-op">=</span> chunks<span class="syn-op">.</span>length'],
+            ['    <span class="syn-kw">const</span> docs <span class="syn-op">=</span> chunks<span class="syn-op">.</span><span class="syn-fn">map</span><span class="syn-op">(</span>c <span class="syn-op">=&gt;</span> <span class="syn-fn">tokenize</span><span class="syn-op">(</span>c<span class="syn-op">.</span>text<span class="syn-op">))</span>'],
+            ['    <span class="syn-kw">const</span> avgdl <span class="syn-op">=</span> docs<span class="syn-op">.</span><span class="syn-fn">reduce</span><span class="syn-op">((</span>s<span class="syn-op">,</span>d<span class="syn-op">) =&gt;</span> s <span class="syn-op">+</span> d<span class="syn-op">.</span>len<span class="syn-op">,</span> <span class="syn-num">0</span><span class="syn-op">)</span> <span class="syn-op">/</span> N'],
+            ['    <span class="syn-kw">return</span> <span class="syn-op">{</span> docs<span class="syn-op">,</span> idf<span class="syn-op">,</span> avgdl<span class="syn-op">,</span> <span class="syn-param">k1</span><span class="syn-op">:</span> <span class="syn-num">1.5</span><span class="syn-op">,</span> <span class="syn-param">b</span><span class="syn-op">:</span> <span class="syn-num">0.75</span> <span class="syn-op">}</span>'],
+            ['<span class="syn-op">}</span>'],
+            [''],
+            ['<span class="syn-kw">function</span> <span class="syn-fn">reciprocalRankFusion</span><span class="syn-op">(</span><span class="syn-param">rankedLists</span><span class="syn-op">,</span> <span class="syn-param">k</span> <span class="syn-op">=</span> <span class="syn-num">60</span><span class="syn-op">) {</span>'],
+            ['    <span class="syn-kw">for</span> <span class="syn-op">(</span><span class="syn-kw">const</span> list <span class="syn-kw">of</span> rankedLists<span class="syn-op">)</span>'],
+            ['        <span class="syn-kw">for</span> <span class="syn-op">(</span><span class="syn-kw">let</span> rank <span class="syn-op">=</span> <span class="syn-num">0</span><span class="syn-op">;</span> rank <span class="syn-op">&lt;</span> list<span class="syn-op">.</span>length<span class="syn-op">;</span> rank<span class="syn-op">++)</span>'],
+            ['            scores<span class="syn-op">[</span>index<span class="syn-op">]</span> <span class="syn-op">+=</span> <span class="syn-num">1</span> <span class="syn-op">/</span> <span class="syn-op">(</span>k <span class="syn-op">+</span> rank <span class="syn-op">+</span> <span class="syn-num">1</span><span class="syn-op">)</span>'],
+            ['<span class="syn-op">}</span>'],
+            [''],
+            ['<span class="syn-cmt">// Merge BM25 + dense → single ranked list</span>'],
+            ['<span class="syn-kw">async function</span> <span class="syn-fn">searchHybrid</span><span class="syn-op">(</span><span class="syn-param">data</span><span class="syn-op">,</span> <span class="syn-param">query</span><span class="syn-op">,</span> <span class="syn-param">topK</span><span class="syn-op">) {</span>'],
+            ['    <span class="syn-kw">const</span> bm25 <span class="syn-op">=</span> <span class="syn-fn">searchBM25</span><span class="syn-op">(</span>data<span class="syn-op">.</span>index<span class="syn-op">,</span> query<span class="syn-op">)</span>'],
+            ['    <span class="syn-kw">const</span> dense <span class="syn-op">=</span> <span class="syn-fn">searchDense</span><span class="syn-op">(</span>data<span class="syn-op">.</span>embeddings<span class="syn-op">,</span> queryEmb<span class="syn-op">)</span>'],
+            ['    <span class="syn-kw">return</span> <span class="syn-fn">reciprocalRankFusion</span><span class="syn-op">([</span>bm25<span class="syn-op">,</span> dense<span class="syn-op">])</span>'],
+            ['<span class="syn-op">}</span>'],
+          ]
+        },
+      ];
+
+      var currentSnippet = 0;
+      var typingTimer = null;
+      var autoplayTimer = null;
+      var isTyping = false;
+      var codeSidebar = document.getElementById('code-sidebar');
+      var codeHeaderTitle = document.getElementById('code-header-title');
+
+      // Group snippets by project
+      var projects = [];
+      var projectMap = {};
+      snippets.forEach(function(s, i) {
+        if (!projectMap[s.project]) {
+          projectMap[s.project] = { name: s.project, files: [] };
+          projects.push(projectMap[s.project]);
+        }
+        projectMap[s.project].files.push({ index: i, tab: s.tab, desc: s.desc });
+      });
+
+      // Build sidebar folder tree
+      projects.forEach(function(proj, pi) {
+        var folder = document.createElement('div');
+        folder.className = 'code-folder' + (pi === 0 ? ' open' : '');
+        folder.innerHTML = '<i class="fa-solid fa-chevron-right folder-icon"></i><i class="fa-solid fa-folder text-yellow-500" style="font-size:12px;"></i> ' + proj.name;
+
+        var filesWrap = document.createElement('div');
+        filesWrap.className = 'code-folder-files' + (pi === 0 ? ' open' : '');
+
+        proj.files.forEach(function(f) {
+          var fileEl = document.createElement('div');
+          fileEl.className = 'code-file';
+          var ext = f.tab.split('.').pop();
+          var iconClass = ext === 'py' ? 'fa-brands fa-python text-yellow-400' : ext === 'js' ? 'fa-brands fa-js text-yellow-300' : 'fa-solid fa-file-code text-blue-400';
+          fileEl.innerHTML = '<i class="code-file-icon ' + iconClass + '"></i>' + f.tab;
+          fileEl.addEventListener('click', function() { switchTo(f.index); });
+          filesWrap.appendChild(fileEl);
+        });
+
+        folder.addEventListener('click', function(e) {
+          // Don't toggle if clicking a file
+          if (e.target.closest('.code-file')) return;
+          folder.classList.toggle('open');
+          filesWrap.classList.toggle('open');
+          // Swap folder icon
+          var folderIcon = folder.querySelector('.fa-folder, .fa-folder-open');
+          if (folderIcon) {
+            folderIcon.classList.toggle('fa-folder');
+            folderIcon.classList.toggle('fa-folder-open');
+          }
+        });
+
+        codeSidebar.appendChild(folder);
+        codeSidebar.appendChild(filesWrap);
+      });
+
+      function switchTo(index) {
+        if (isTyping) {
+          clearTimeout(typingTimer);
+          isTyping = false;
+        }
+        if (autoplayTimer) clearTimeout(autoplayTimer);
+        currentSnippet = index;
+
+        var s = snippets[index];
+
+        // Update sidebar active state
+        codeSidebar.querySelectorAll('.code-file').forEach(function(f) { f.classList.remove('active'); });
+        var allFiles = codeSidebar.querySelectorAll('.code-file');
+        allFiles.forEach(function(f) {
+          if (f.textContent.trim() === s.tab) f.classList.add('active');
+        });
+
+        // Open the parent folder
+        var folders = codeSidebar.querySelectorAll('.code-folder');
+        var fileSections = codeSidebar.querySelectorAll('.code-folder-files');
+        folders.forEach(function(folder, fi) {
+          if (folder.textContent.indexOf(s.project) !== -1) {
+            folder.classList.add('open');
+            fileSections[fi].classList.add('open');
+            var folderIcon = folder.querySelector('.fa-folder');
+            if (folderIcon) { folderIcon.classList.remove('fa-folder'); folderIcon.classList.add('fa-folder-open'); }
+          }
+        });
+
+        // Update open tab
+        codeTabs.innerHTML = '';
+        var tab = document.createElement('div');
+        tab.className = 'code-tab active';
+        var ext = s.tab.split('.').pop();
+        var iconClass = ext === 'py' ? 'fa-brands fa-python text-yellow-400' : ext === 'js' ? 'fa-brands fa-js text-yellow-300' : 'fa-solid fa-file-code text-blue-400';
+        tab.innerHTML = '<i class="' + iconClass + '" style="font-size:11px;"></i>' + s.tab;
+        codeTabs.appendChild(tab);
+
+        // Update header + label
+        codeHeaderTitle.textContent = s.project + ' / ' + s.tab;
+        codeLabel.innerHTML = '<span class="proj-name">' + s.project + '</span><span class="proj-desc">— ' + s.desc + '</span>';
+
+        // Clear and type
+        codeBody.innerHTML = '';
+        typeLines(s.lines, 0);
+      }
+
+      function typeLines(lines, lineIndex) {
+        if (lineIndex >= lines.length) {
+          isTyping = false;
+          // Auto-advance to next snippet after 4 seconds
+          autoplayTimer = setTimeout(function() {
+            switchTo((currentSnippet + 1) % snippets.length);
+          }, 4000);
+          return;
+        }
+
+        isTyping = true;
+        var lineDiv = document.createElement('div');
+        lineDiv.className = 'code-line';
+        var numSpan = document.createElement('span');
+        numSpan.className = 'code-line-num';
+        numSpan.textContent = lineIndex + 1;
+        var contentSpan = document.createElement('span');
+        contentSpan.className = 'code-line-content';
+        lineDiv.appendChild(numSpan);
+        lineDiv.appendChild(contentSpan);
+        codeBody.appendChild(lineDiv);
+
+        var html = lines[lineIndex][0];
+        if (!html) {
+          // Empty line — just show it instantly
+          contentSpan.innerHTML = '&nbsp;';
+          codeBody.scrollTop = codeBody.scrollHeight;
+          typingTimer = setTimeout(function() { typeLines(lines, lineIndex + 1); }, 30);
+          return;
+        }
+
+        // Type character by character (HTML-aware)
+        var chars = [];
+        var inTag = false;
+        var tagBuffer = '';
+        for (var c = 0; c < html.length; c++) {
+          if (html[c] === '<') { inTag = true; tagBuffer = '<'; continue; }
+          if (inTag) {
+            tagBuffer += html[c];
+            if (html[c] === '>') { inTag = false; chars.push(tagBuffer); tagBuffer = ''; }
+            continue;
+          }
+          chars.push(html[c]);
+        }
+
+        var charIndex = 0;
+        var built = '';
+
+        function typeChar() {
+          if (charIndex >= chars.length) {
+            contentSpan.innerHTML = built;
+            codeBody.scrollTop = codeBody.scrollHeight;
+            typingTimer = setTimeout(function() { typeLines(lines, lineIndex + 1); }, 40);
+            return;
+          }
+          built += chars[charIndex];
+          charIndex++;
+          contentSpan.innerHTML = built + '<span class="code-cursor"></span>';
+          codeBody.scrollTop = codeBody.scrollHeight;
+
+          var delay = prefersReducedMotion ? 0 : (8 + Math.random() * 14);
+          typingTimer = setTimeout(typeChar, delay);
+        }
+        typeChar();
+      }
+
+      // Start first snippet
+      switchTo(0);
+    })();
+
+
+  })();
+  </script>
+
+</body>
+</html>
