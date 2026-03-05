@@ -478,6 +478,20 @@
       }
       .floating-code, .blob { display: none; }
     }
+    .project-card {
+      transition: opacity 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    #pm-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: none;
+      pointer-events: none;
+      z-index: 1;
+    }
   </style>
 </head>
 
@@ -711,7 +725,7 @@
             <h3 class="text-lg font-bold text-slate-800 mb-1">Full Stack &amp; AI Engineer | Project Lead</h3>
             <p class="text-sm text-pink-500 mb-3">Wineo AI, Casablanca</p>
             <p class="text-sm text-slate-500 leading-relaxed mb-3">
-              Sole developer of ARA-3, a full ATS automating the hiring pipeline end-to-end: multi-channel CV ingestion (email/WhatsApp/Google Drive/careers page) &rarr; auto-parse &rarr; skill matching &rarr; dual-engine scoring (ATS rules + LLM via Ollama/OpenAI/Azure/Gemini) &rarr; automated test invitations &rarr; AI-proctored assessments (MediaPipe + TensorFlow.js) &rarr; top-K candidate profiles emailed to recruiters. Includes LinkedIn job posting, prompt injection defense, Kanban pipeline, and i18n (FR/EN/AR with RTL). Also built Qanoun Portal, a 7-module AI legal platform for Moroccan law — contract generation, dual-mode legal chat, RAG over Moroccan legislation, credit billing, and admin panel. ~170 files, 80+ endpoints across both platforms.
+              Sole developer of two enterprise platforms. ARA-3 &mdash; a full ATS with multi-channel CV ingestion, dual-engine scoring (ATS + LLM), AI-proctored assessments, and trilingual i18n (FR/EN/AR). Qanoun Portal &mdash; a 7-module AI legal platform for Moroccan law covering contract generation, legal chat, RAG, and billing. ~170 files, 80+ endpoints across both.
             </p>
             <div class="flex flex-wrap gap-2">
               <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">React</span>
@@ -794,18 +808,29 @@
 
 
   <!-- ════════════════════════════════════════════════════════════════
-       5. PROJECTS
+       5. PROJECTS (Particle Mountains Banner + Card Grid)
        ════════════════════════════════════════════════════════════════ -->
-  <section id="projects" class="relative py-24 px-6 overflow-hidden">
-    <div class="blob w-[450px] h-[450px] bg-purple-300/25 top-20 -right-40" style="animation-delay:1.5s;"></div>
-    <div class="blob w-[350px] h-[350px] bg-pink-300/20 bottom-20 -left-32" style="animation-delay:4s;"></div>
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800" data-animate="fade-up">Featured <span class="gradient-text">Projects</span></h2>
-        <div class="section-line" data-animate="fade-up"></div>
-      </div>
+  <section id="projects" class="relative py-0 overflow-hidden">
 
-      <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
+    <!-- DARK BANNER: Particle Mountains -->
+    <div id="pm-wrapper" style="background:transparent;position:relative;padding:24px 0 20px;">
+      <!-- Section Title -->
+      <div class="text-center mb-4" style="position:relative;z-index:2;">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">Featured <span class="gradient-text">Projects</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <!-- Canvas -->
+      <div style="position:relative;width:100%;padding:0 16px;box-sizing:border-box;">
+        <canvas id="pm-canvas" style="width:100%;display:block;cursor:default;"></canvas>
+      </div>
+    </div>
+
+    <!-- LIGHT AREA: Project Cards -->
+    <div class="relative px-6 py-20 overflow-hidden">
+      <div class="blob w-[450px] h-[450px] bg-purple-300/25 top-20 -right-40" style="animation-delay:1.5s;"></div>
+      <div class="blob w-[350px] h-[350px] bg-pink-300/20 bottom-20 -left-32" style="animation-delay:4s;"></div>
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
 
         <!-- Project 1: ARA-3 -->
         <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
@@ -1016,6 +1041,7 @@
           </div>
         </div>
 
+        </div>
       </div>
     </div>
   </section>
@@ -1402,7 +1428,7 @@
             <span class="text-xs text-slate-400 font-mono">Medium</span>
           </div>
           <h3 class="text-base font-bold text-slate-800 mb-2 group-hover:text-pink-500 transition-colors">What I've Built: AI Surveillance, Legal RAG, Distributed LLM Training, and Recruitment Platforms</h3>
-          <p class="text-sm text-slate-500 leading-relaxed mb-3">A walkthrough of the production systems I've designed and shipped &mdash; from 500-camera real-time analytics to multi-tenant SaaS recruitment...</p>
+          <p class="text-sm text-slate-500 leading-relaxed mb-3">A walkthrough of the production systems I've designed and shipped &mdash; from real-time AI surveillance to multi-tenant SaaS recruitment...</p>
           <span class="text-sm font-medium text-pink-500">Read on Medium <i class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
         </a>
 
@@ -1456,41 +1482,6 @@
         </div>
       </div>
 
-      <!-- Contact Form -->
-      <div data-animate="fade-up">
-        <form id="contact-form" class="glass rounded-2xl p-8 sm:p-10 max-w-2xl mx-auto">
-          <div class="grid sm:grid-cols-2 gap-5 mb-5">
-            <div>
-              <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Name</label>
-              <input type="text" id="name" name="name" required
-                class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all focus:border-pink-300 focus:bg-white/50"
-                placeholder="Your name" />
-            </div>
-            <div>
-              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Email</label>
-              <input type="email" id="email" name="email" required
-                class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all focus:border-pink-300 focus:bg-white/50"
-                placeholder="your@email.com" />
-            </div>
-          </div>
-          <div class="mb-5">
-            <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Subject</label>
-            <input type="text" id="subject" name="subject" required
-              class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all focus:border-pink-300 focus:bg-white/50"
-              placeholder="Project collaboration" />
-          </div>
-          <div class="mb-6">
-            <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Message</label>
-            <textarea id="message" name="message" rows="5" required
-              class="form-input w-full px-4 py-3 rounded-xl bg-white/30 backdrop-blur-sm border border-white/40 text-slate-800 placeholder-slate-400 transition-all resize-none focus:border-pink-300 focus:bg-white/50"
-              placeholder="Tell me about your project..."></textarea>
-          </div>
-          <button type="submit"
-            class="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-0.5">
-            Send Message <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
-          </button>
-        </form>
-      </div>
     </div>
   </section>
 
@@ -2102,23 +2093,6 @@
       full.classList.toggle('hidden');
     };
 
-    /* ── Contact Form (basic UI feedback) ── */
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Message Sent!';
-      btn.classList.remove('from-pink-500', 'via-purple-500', 'to-indigo-500');
-      btn.classList.add('from-green-500', 'to-emerald-500');
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.classList.add('from-pink-500', 'via-purple-500', 'to-indigo-500');
-        btn.classList.remove('from-green-500', 'to-emerald-500');
-        form.reset();
-      }, 3000);
-    });
-
     /* ══════════════════════════════════════════════════════════════
        GITHUB CONTRIBUTIONS — Dynamic graph with year tabs
        ══════════════════════════════════════════════════════════════ */
@@ -2721,6 +2695,285 @@
 
       // Start first snippet
       switchTo(0);
+    })();
+
+
+    // ═══════════════════════════════════════════════════════════════
+    // PARTICLE MOUNTAINS — Projects Banner (v3)
+    // ═══════════════════════════════════════════════════════════════
+    (function() {
+      var canvas = document.getElementById('pm-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var dpr = window.devicePixelRatio || 1;
+      var container = canvas.parentElement;
+      var W, H, baseY;
+      var allParticles = [];
+      var dust = [];
+      var stars = [];
+      var hoveredIdx = -1;
+      var startTime = performance.now();
+      var isMobile = window.innerWidth < 768;
+      var cards = document.querySelectorAll('#projects-grid > .project-card');
+
+      // Card order: ARA-3(0), Qanoun(1), mLoRA(2), Lushan(3), BizFinder(4), MedPredict(5)
+      // Mountain order: Qanoun(0), MedPredict(1), ARA-3(2), mLoRA(3), Lushan(4), BizFinder(5)
+      var mountainToCard = [1, 5, 0, 2, 3, 4];
+
+      var mountains = [
+        { name: 'Qanoun',     sub: 'AI Legal Platform',         x: 0.12, h: 0.55, color: [236,72,153] },
+        { name: 'MedPredict', sub: 'Medical Education AI',      x: 0.28, h: 0.68, color: [192,132,252] },
+        { name: 'ARA-3',      sub: 'Applicant Tracking System', x: 0.48, h: 1.00, color: [236,72,153] },
+        { name: 'mLoRA',      sub: 'Distributed LLM Training',  x: 0.63, h: 0.52, color: [129,140,248] },
+        { name: 'Lushan',     sub: 'AI Video Surveillance',     x: 0.78, h: 0.72, color: [192,132,252] },
+        { name: 'BizFinder',  sub: 'Business Discovery App',    x: 0.92, h: 0.40, color: [249,168,212] }
+      ];
+
+      function mountainNoise(x, seed) {
+        return Math.sin(x * 0.03 + seed) * 0.12
+             + Math.sin(x * 0.07 + seed * 2.3) * 0.06
+             + Math.sin(x * 0.15 + seed * 5.1) * 0.03;
+      }
+
+      function resize() {
+        isMobile = window.innerWidth < 768;
+        W = container.clientWidth;
+        H = Math.round(W * 0.15);
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        baseY = H * 0.88;
+        cards = document.querySelectorAll('#projects-grid > .project-card');
+        generateAll();
+      }
+
+      function generateAll() {
+        allParticles = [];
+        var ridges = [
+          { hScale: 1.0,  offX: 0,      spread: 0.09, countBase: 1200, countScale: 800,  seed: 0,    brightMul: 1.0 },
+          { hScale: 0.85, offX: 0.015,  spread: 0.11, countBase: 600,  countScale: 400,  seed: 7.7,  brightMul: 0.70 },
+          { hScale: 0.65, offX: -0.025, spread: 0.13, countBase: 300,  countScale: 200,  seed: 13.3, brightMul: 0.40 }
+        ];
+        if (isMobile) {
+          ridges.pop();
+          ridges[0].countBase = 800; ridges[0].countScale = 500;
+          ridges[1].countBase = 400; ridges[1].countScale = 200;
+        }
+
+        for (var m = 0; m < mountains.length; m++) {
+          var mt = mountains[m];
+          var cx = mt.x * W;
+          var maxPeakH = mt.h * H * 0.58;
+          mt._cx = cx;
+          mt._peakY = baseY - maxPeakH;
+          mt._spread = W * 0.09;
+
+          for (var ri = 0; ri < ridges.length; ri++) {
+            var rdg = ridges[ri];
+            var peakH = maxPeakH * rdg.hScale;
+            var spread = W * rdg.spread;
+            var offX = W * rdg.offX * (m % 2 === 0 ? 1 : -1);
+            var count = Math.round(rdg.countBase + mt.h * rdg.countScale);
+            var seed = rdg.seed + m * 3.7;
+
+            for (var i = 0; i < count; i++) {
+              var ox = (Math.random() - 0.5) * 2 * spread;
+              var dist = Math.abs(ox) / spread;
+              var hFactor = Math.pow(Math.max(0, 1 - dist), 2.2);
+              var nv = mountainNoise(cx + offX + ox, seed);
+              var py = baseY - hFactor * peakH + nv * peakH;
+              py += (Math.random() - 0.5) * peakH * 0.05;
+              var brightness = 0.15 + 0.85 * hFactor * rdg.brightMul;
+
+              allParticles.push({
+                x: cx + offX + ox,
+                y: py,
+                r: 0.3 + Math.random() * 1.1,
+                brightness: brightness,
+                phase: Math.random() * Math.PI * 2,
+                speed: 0.15 + Math.random() * 0.55,
+                mIdx: m
+              });
+            }
+          }
+        }
+
+        // dust
+        dust = [];
+        var dustCount = isMobile ? 80 : 150;
+        for (var d = 0; d < dustCount; d++) {
+          dust.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: 0.3 + Math.random() * 0.6,
+            vx: (Math.random() - 0.5) * 0.1,
+            vy: -0.03 - Math.random() * 0.12,
+            alpha: 0.02 + Math.random() * 0.10,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+
+        // stars
+        stars = [];
+        var starCount = isMobile ? 10 : 20;
+        for (var s = 0; s < starCount; s++) {
+          stars.push({
+            x: Math.random() * W,
+            y: Math.random() * H * 0.40,
+            r: 1.5 + Math.random() * 1.0,
+            phase: Math.random() * Math.PI * 2,
+            color: Math.random() > 0.5 ? [236,72,153] : [192,132,252]
+          });
+        }
+      }
+
+      function drawGrid() {
+        ctx.lineWidth = 0.5;
+        // no grid — clean light background
+      }
+
+      function draw(time) {
+        var t = (time - startTime) / 1000;
+        ctx.clearRect(0, 0, W, H);
+        drawGrid();
+
+        // stars
+        for (var s = 0; s < stars.length; s++) {
+          var st = stars[s];
+          var sa = 0.5 + 0.5 * Math.sin(t * 0.25 + st.phase);
+          if (hoveredIdx !== -1) sa *= 0.12;
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + st.color[0] + ',' + st.color[1] + ',' + st.color[2] + ',' + sa.toFixed(3) + ')';
+          ctx.fill();
+        }
+
+        // dust
+        for (var d = 0; d < dust.length; d++) {
+          var dp = dust[d];
+          dp.x += dp.vx + Math.sin(t * 0.3 + dp.phase) * 0.03;
+          dp.y += dp.vy;
+          if (dp.y < -5) { dp.y = H + 5; dp.x = Math.random() * W; }
+          if (dp.x < -5) dp.x = W + 5;
+          if (dp.x > W + 5) dp.x = -5;
+          var da = dp.alpha * (0.6 + 0.4 * Math.sin(t * 0.5 + dp.phase));
+          ctx.beginPath();
+          ctx.arc(dp.x, dp.y, dp.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(236,72,153,' + da.toFixed(3) + ')';
+          ctx.fill();
+        }
+
+        // glow aura behind hovered mountain
+        if (hoveredIdx !== -1) {
+          var hm = mountains[hoveredIdx];
+          var grad = ctx.createRadialGradient(hm._cx, hm._peakY + 15, 0, hm._cx, hm._peakY + 15, hm._spread * 1.6);
+          grad.addColorStop(0, 'rgba(' + hm.color[0] + ',' + hm.color[1] + ',' + hm.color[2] + ',0.14)');
+          grad.addColorStop(0.5, 'rgba(' + hm.color[0] + ',' + hm.color[1] + ',' + hm.color[2] + ',0.03)');
+          grad.addColorStop(1, 'rgba(' + hm.color[0] + ',' + hm.color[1] + ',' + hm.color[2] + ',0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(hm._cx - hm._spread * 2, hm._peakY - 30, hm._spread * 4, baseY - hm._peakY + 50);
+        }
+
+        // particles
+        for (var i = 0; i < allParticles.length; i++) {
+          var pt = allParticles[i];
+          var mt = mountains[pt.mIdx];
+          var alpha = pt.brightness * (0.65 + 0.35 * Math.sin(t * pt.speed * 2 + pt.phase));
+          var r = pt.r;
+
+          if (hoveredIdx !== -1) {
+            if (pt.mIdx === hoveredIdx) { r *= 1.12; }
+            else { alpha *= 0.12; }
+          }
+
+          var cr, cg, cb;
+          if (pt.brightness > 0.7) {
+            cr = mt.color[0]; cg = mt.color[1]; cb = mt.color[2];
+          } else if (pt.brightness > 0.35) {
+            var bl = (pt.brightness - 0.35) / 0.35;
+            cr = Math.round(200 + (mt.color[0] - 200) * bl);
+            cg = Math.round(150 + (mt.color[1] - 150) * bl);
+            cb = Math.round(220 + (mt.color[2] - 220) * bl);
+          } else {
+            var bl2 = pt.brightness / 0.35;
+            cr = Math.round(180 + 20 * bl2);
+            cg = Math.round(130 + 20 * bl2);
+            cb = Math.round(200 + 20 * bl2);
+          }
+
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + alpha.toFixed(3) + ')';
+          ctx.fill();
+        }
+
+        // labels
+        for (var m = 0; m < mountains.length; m++) {
+          var mt = mountains[m];
+          var cx = mt._cx;
+          var peakY = mt._peakY;
+          var col = 'rgba(' + mt.color[0] + ',' + mt.color[1] + ',' + mt.color[2] + ',';
+          var la = hoveredIdx === -1 ? 1.0 : (hoveredIdx === m ? 1.0 : 0.1);
+
+          // name
+          ctx.font = '700 13px Inter, system-ui, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = 'rgba(30,41,59,' + (0.8 * la).toFixed(3) + ')';
+          ctx.fillText(mt.name, cx, peakY - 18);
+
+          // subtitle
+          ctx.font = '10px Inter, system-ui, sans-serif';
+          ctx.fillStyle = col + (0.5 * la).toFixed(3) + ')';
+          ctx.fillText(mt.sub, cx, peakY - 5);
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      // highlight cards
+      function updateCards() {
+        for (var c = 0; c < cards.length; c++) {
+          var card = cards[c];
+          if (hoveredIdx !== -1 && mountainToCard[hoveredIdx] === c) {
+            card.style.boxShadow = '0 0 30px rgba(236,72,153,0.15)';
+            card.style.borderColor = 'rgba(236,72,153,0.3)';
+            card.style.opacity = '';
+          } else if (hoveredIdx !== -1) {
+            card.style.boxShadow = '';
+            card.style.borderColor = '';
+            card.style.opacity = '0.5';
+          } else {
+            card.style.boxShadow = '';
+            card.style.borderColor = '';
+            card.style.opacity = '';
+          }
+        }
+      }
+
+      // hover detection
+      canvas.addEventListener('mousemove', function(e) {
+        var rect = canvas.getBoundingClientRect();
+        var mx = e.clientX - rect.left;
+        var my = e.clientY - rect.top;
+        hoveredIdx = -1;
+        for (var m = 0; m < mountains.length; m++) {
+          var mt = mountains[m];
+          if (Math.abs(mx - mt._cx) < mt._spread * 1.2 && my > mt._peakY - 40 && my < baseY + 20) {
+            hoveredIdx = m; break;
+          }
+        }
+        updateCards();
+      });
+
+      canvas.addEventListener('mouseleave', function() {
+        hoveredIdx = -1;
+        updateCards();
+      });
+
+      window.addEventListener('resize', resize);
+      resize();
+      requestAnimationFrame(draw);
     })();
 
 
