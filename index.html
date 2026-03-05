@@ -748,15 +748,17 @@
             <h3 class="text-lg font-bold text-slate-800 mb-1">Lead Full Stack Developer</h3>
             <p class="text-sm text-pink-500 mb-3">Jiangsu Yuexiu Technology, Remote (Shenzhen)</p>
             <p class="text-sm text-slate-500 leading-relaxed mb-3">
-              Built the full-stack 庐山博物馆AI视频中台 (Lushan Museum AI Video Platform) &mdash; 66 REST API endpoints + WebSocket, 6 AI detection types, 32-permission RBAC, real-time alert lifecycle management. Designed and shipped both the FastAPI backend and Vue 3 frontend.
+              Delivered two full-stack platforms for different clients. <strong class="text-slate-700">Lushan Museum AI Video Platform</strong> &mdash; 66 REST endpoints + WebSocket, 6 AI detection types, 32-permission RBAC (FastAPI + Vue 3). <strong class="text-slate-700">Student Safety AI</strong> &mdash; event-driven microservices (7 services) for real-time student monitoring across 51 cameras, PII encryption, event sourcing, bilingual UI (React + Node.js).
             </p>
             <div class="flex flex-wrap gap-2">
               <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">FastAPI</span>
               <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Vue 3</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">React</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Node.js</span>
               <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">PostgreSQL</span>
               <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Redis</span>
               <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Docker</span>
-              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">WebSocket</span>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/30 text-pink-500 border border-white/40">Socket.IO</span>
             </div>
           </div>
         </div>
@@ -830,7 +832,7 @@
       <div class="blob w-[450px] h-[450px] bg-purple-300/25 top-20 -right-40" style="animation-delay:1.5s;"></div>
       <div class="blob w-[350px] h-[350px] bg-pink-300/20 bottom-20 -left-32" style="animation-delay:4s;"></div>
       <div class="max-w-5xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
 
         <!-- Project 1: ARA-3 -->
         <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
@@ -973,38 +975,7 @@
           </div>
         </div>
 
-        <!-- Project 5: Big Data Pipeline -->
-        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
-          <div class="project-header px-6 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-database text-2xl text-slate-400"></i>
-              <div>
-                <h3 class="text-lg font-bold text-slate-700">BizFinder</h3>
-                <p class="text-xs text-slate-400">Big Data Business Discovery App</p>
-              </div>
-            </div>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-500 border border-blue-200/50">Internship</span>
-          </div>
-          <div class="p-6">
-            <p class="text-xs text-pink-500 font-medium mb-1">Intern Developer &mdash; SunCaper Data Co., Chengdu</p>
-            <p class="text-sm text-slate-500 leading-relaxed mb-4">
-              Full-stack business finder app powered by the Yelp dataset (2+ TB). Hadoop ETL pipeline (HDFS + MapReduce) with Spark analytics (SQL, MLlib) for user behavior analysis, sentiment analysis, and personalized recommendations. Native iOS client in Swift with MapKit, search, reviews, and ML-driven results.
-            </p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Hadoop</span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Spark</span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">HDFS</span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">MySQL</span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Swift</span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">MapKit</span>
-            </div>
-            <button onclick="openProjectModal(4)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
-              Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Project 6: MedPredict -->
+        <!-- Project 5: MedPredict -->
         <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
           <div class="project-header px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -1031,13 +1002,44 @@
               <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Mistral 7B</span>
             </div>
             <div class="flex items-center gap-4">
-              <button onclick="openProjectModal(5)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+              <button onclick="openProjectModal(4)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
                 Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
               </button>
-              <button onclick="openProjectModal(5)" class="flex items-center gap-1.5 text-sm font-medium text-purple-500 hover:text-purple-600 transition-colors cursor-pointer">
+              <button onclick="openProjectModal(4)" class="flex items-center gap-1.5 text-sm font-medium text-purple-500 hover:text-purple-600 transition-colors cursor-pointer">
                 <i class="fa-solid fa-circle-play"></i> Watch Video
               </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Project 7: Student Monitoring Platform -->
+        <div class="glass rounded-2xl glow-border group project-card overflow-hidden" data-animate="fade-up" data-tilt>
+          <div class="project-header px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-shield-halved text-2xl text-slate-400"></i>
+              <div>
+                <h3 class="text-lg font-bold text-slate-700">Student Safety AI</h3>
+                <p class="text-xs text-slate-400">Student Video Monitoring Platform</p>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-green-50 text-green-500 border border-green-200/50">Freelance</span>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-pink-500 font-medium mb-1">Full-Stack Developer &mdash; Jiangsu Yuexiu Technology, Shenzhen</p>
+            <p class="text-sm text-slate-500 leading-relaxed mb-4">
+              Event-driven microservices platform monitoring 51 cameras across 5 school environments &mdash; detecting emotional distress, bullying, and safety incidents in real-time. 7 Node.js/TypeScript services, event-sourced alert pipeline, AES-256-GCM PII encryption, materialized-view analytics, and bilingual React frontend (CN/EN).
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">React</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Node.js</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">PostgreSQL</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Redis</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Socket.IO</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-white/30 text-pink-500 border border-white/30">Docker</span>
+            </div>
+            <button onclick="openProjectModal(5)" class="text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors cursor-pointer">
+              Read More <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+            </button>
           </div>
         </div>
 
@@ -1550,17 +1552,47 @@
     const bar3 = document.getElementById('bar3');
     let menuOpen = false;
 
+    const navInner = navbar.querySelector('div');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const progressBar = document.getElementById('scroll-progress');
+    let scrollTicking = false;
+
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('glass');
-        navbar.style.background = '';
-        navbar.querySelector('div').classList.remove('h-20');
-        navbar.querySelector('div').classList.add('h-16');
-      } else {
-        navbar.classList.remove('glass');
-        navbar.style.background = 'transparent';
-        navbar.querySelector('div').classList.add('h-20');
-        navbar.querySelector('div').classList.remove('h-16');
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          const sy = window.scrollY;
+
+          // Navbar shrink
+          if (sy > 50) {
+            navbar.classList.add('glass');
+            navbar.style.background = '';
+            navInner.classList.remove('h-20');
+            navInner.classList.add('h-16');
+          } else {
+            navbar.classList.remove('glass');
+            navbar.style.background = 'transparent';
+            navInner.classList.add('h-20');
+            navInner.classList.remove('h-16');
+          }
+
+          // Active section highlighting
+          let current = '';
+          sections.forEach(section => {
+            if (sy >= section.offsetTop - 100) current = section.getAttribute('id');
+          });
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+          });
+
+          // Scroll progress bar
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          progressBar.style.transform = 'scaleX(' + (docHeight > 0 ? sy / docHeight : 0) + ')';
+
+          scrollTicking = false;
+        });
+        scrollTicking = true;
       }
     });
 
@@ -1581,31 +1613,6 @@
         bar2.style.opacity = '1';
         bar3.style.transform = '';
       });
-    });
-
-    // Active section highlighting
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const top = section.offsetTop - 100;
-        if (window.scrollY >= top) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
-      });
-    });
-
-    /* ── 3. Scroll Progress Bar ── */
-    const progressBar = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
-      progressBar.style.transform = 'scaleX(' + progress + ')';
     });
 
     /* ── 4. Hero Animations ── */
@@ -1919,7 +1926,7 @@
           <p class="text-sm text-slate-500 mb-5">Full-stack enterprise platform for intelligent video surveillance and AI-powered security at the Lushan Museum. Built to protect cultural heritage assets through real-time threat detection, multi-stream video monitoring, and automated alert workflows.</p>
 
           <div class="rounded-xl overflow-hidden mb-6">
-            <video controls playsinline class="w-full rounded-xl" poster="">
+            <video controls playsinline preload="none" class="w-full rounded-xl" poster="">
               <source src="assets/images/Surveilance_compressed.mp4" type="video/mp4">
             </video>
             <p class="text-xs text-slate-400 mt-2 text-center">Platform demo — multi-stream monitoring, AI detection &amp; alert workflows</p>
@@ -1957,39 +1964,13 @@
         `
       },
       {
-        title: 'BizFinder — Big Data Business Discovery App',
-        gradient: 'from-amber-500 via-orange-500 to-pink-500',
-        content: `
-          <p class="text-sm text-slate-500 mb-5">Full-stack business finder application powered by the Yelp dataset (2+ TB), combining a big data processing pipeline with a native iOS client. Built during internship at SunCaper Data Co., Chengdu.</p>
-
-          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Data Pipeline</h4>
-          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
-            <li><strong class="text-slate-700">Ingestion &amp; Storage:</strong> End-to-end ETL workflow using Hadoop (HDFS + MapReduce) for data ingestion and partitioning, MySQL for structured storage with normalization and indexing.</li>
-            <li><strong class="text-slate-700">Analytics:</strong> Apache Spark (RDDs, Spark SQL, Spark MLlib) for user behavior analysis, business performance metrics, and sentiment analysis on reviews.</li>
-            <li><strong class="text-slate-700">Visualization:</strong> Analysis outputs transformed into bar charts, heatmaps, and interactive maps surfaced directly in the app UI.</li>
-          </ul>
-
-          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">iOS Application</h4>
-          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
-            <li><strong class="text-slate-700">Business search</strong> with personalized recommendations driven by Spark analysis results</li>
-            <li><strong class="text-slate-700">Interactive map display</strong> via MapKit with business locations and proximity-based suggestions</li>
-            <li><strong class="text-slate-700">Business detail pages</strong> with hours, ratings, and review history</li>
-            <li><strong class="text-slate-700">User review submission</strong> and photo uploads</li>
-            <li><strong class="text-slate-700">Customizable settings</strong> &mdash; filters, language, accessibility options</li>
-          </ul>
-
-          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Impact</h4>
-          <p class="text-sm text-slate-500">Received positive user feedback for the integration of ML-driven recommendations into a clean, intuitive mobile interface. Tackled performance bottlenecks through parallel processing, caching, and algorithmic optimization across the pipeline.</p>
-        `
-      },
-      {
         title: 'MedPredict — AI Medical Education Platform',
         gradient: 'from-pink-500 via-rose-400 to-purple-500',
         content: `
           <p class="text-sm text-slate-500 mb-5">Built as an undergraduate thesis at Sichuan University, College of Software Engineering. An interactive web platform helping medical students prepare for USMLE, NEET-PG, and AIIMS exams — combining a fine-tuned biomedical language model with 5 integrated learning modules.</p>
 
           <div class="rounded-xl overflow-hidden mb-6">
-            <video controls playsinline class="w-full rounded-xl" poster="">
+            <video controls playsinline preload="none" class="w-full rounded-xl" poster="">
               <source src="assets/images/Medpredict_compressed.mp4" type="video/mp4">
             </video>
             <p class="text-xs text-slate-400 mt-2 text-center">Platform demo — MCQ classifier, flashcard generator, symptom checker &amp; clinical case simulator</p>
@@ -2031,6 +2012,78 @@
               <p>PubMedBERT zero-shot: ~40% &middot; <strong class="text-pink-500">MedPredict: 42.7–46.3%</strong> &middot; GPT-3.5: ~60% &middot; Med-PaLM 2: 72.3%</p>
               <p class="text-xs text-slate-400 mt-1">Single 110M-param encoder, no retrieval, no chain-of-thought, no ensembling — designed for educational use on consumer hardware.</p>
             </div>
+          </div>
+        `
+      },
+      {
+        title: 'Student Safety AI — School Video Monitoring Platform',
+        gradient: 'from-green-500 via-teal-500 to-cyan-500',
+        content: `
+          <p class="text-sm text-slate-500 mb-5">Event-driven microservices platform built for a K-12 school client of Jiangsu Yuexiu Technology (Shenzhen). Detects emotional distress, bullying, and safety incidents in real-time across 51 cameras in 5 school environments. 7 independently deployable Node.js/TypeScript services, field-level PII encryption, event-sourced alert pipeline, and a bilingual React frontend (CN/EN).</p>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Architecture — 7 Microservices</h4>
+          <div class="glass rounded-xl p-4 mb-5">
+            <div class="text-sm text-slate-500 space-y-1">
+              <p><strong class="text-slate-700">API Gateway:</strong> Express.js entry point &mdash; JWT verification, Redis-backed sliding-window rate limiting (100 req/min), CORS, correlation IDs for distributed tracing, health aggregation fan-out</p>
+              <p><strong class="text-slate-700">Auth Service:</strong> PIN-based login with bcrypt hashing, JWT access tokens (15-min TTL) + refresh tokens (7-day, stored in Redis), role switching, one-time login codes, full audit logging</p>
+              <p><strong class="text-slate-700">Alert Service:</strong> Event sourcing &mdash; all status transitions are immutable events in <code>alert_events</code>. Cursor-based pagination on <code>(created_at, id)</code> compound index. PostgreSQL full-text search via <code>tsvector</code>. Redis pub/sub &rarr; Socket.IO fan-out for real-time broadcasting</p>
+              <p><strong class="text-slate-700">Student Service:</strong> PII fields (name, student ID) encrypted with AES-256-GCM at rest &mdash; per-record IV, decryption only at service boundary. Risk scores computed from alert history (severity &times; recency decay &times; frequency). Soft deletes for compliance</p>
+              <p><strong class="text-slate-700">Camera Service:</strong> 51-camera registry with RTSP stream management, heartbeat-based health monitoring (30s interval &rarr; warning at 60s &rarr; offline at 120s), presigned stream URLs (5-min TTL)</p>
+              <p><strong class="text-slate-700">Analytics Service:</strong> PostgreSQL materialized views refreshed every 60s for dashboard KPIs. Pre-aggregated daily time-series. P50/P95/P99 response time tracking. CSV/JSON export</p>
+              <p><strong class="text-slate-700">Notification Service:</strong> Multi-channel delivery (SMS/Twilio, Email/SendGrid, WeChat Work). Retry policies (none, simple, exponential backoff). Priority routing &mdash; critical alerts escalate if unacknowledged after 5 minutes</p>
+            </div>
+          </div>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">5 Detection Scenarios</h4>
+          <div class="glass rounded-xl p-4 mb-5">
+            <div class="text-sm text-slate-500 space-y-1">
+              <p><strong class="text-slate-700">Exam Pressure</strong> (Medium) &mdash; Academic stress and emotional distress during examinations</p>
+              <p><strong class="text-slate-700">Isolation Bullying</strong> (High) &mdash; Social exclusion and peer relationship deterioration</p>
+              <p><strong class="text-slate-700">Self Harm</strong> (Critical) &mdash; Crisis triggers requiring immediate intervention</p>
+              <p><strong class="text-slate-700">Teacher Verbal Abuse</strong> (High) &mdash; Authority misconduct and verbal aggression</p>
+              <p><strong class="text-slate-700">Cyber Tracking</strong> (Medium) &mdash; Digital harassment and online safety threats</p>
+            </div>
+          </div>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Camera Coverage — 51 Cameras</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Classrooms (15):</strong> 2&ndash;3 per room, ceiling corners, 2.8mm wide-angle, WDR for backlit windows, emotion detection focus</li>
+            <li><strong class="text-slate-700">Hallways (12):</strong> Ceiling center-line, 4mm lens, 10&ndash;15m spacing near stairwells and intersections</li>
+            <li><strong class="text-slate-700">Sports Grounds (8):</strong> Pole-mounted varifocal 2.8&ndash;12mm, IP67 weatherproof, IR illuminators for after-school</li>
+            <li><strong class="text-slate-700">Cafeteria (10):</strong> 2.8mm wide-angle, anti-fog housing, dedicated queue-area camera</li>
+            <li><strong class="text-slate-700">Dormitories (6):</strong> Entrance/exit only (privacy), night vision IR 30m, tamper-resistant dome housings</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Key Technical Decisions</h4>
+          <ul class="text-sm text-slate-500 space-y-2 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Event Sourcing:</strong> All alert state transitions stored as immutable events &mdash; full audit trail, temporal queries, and replay capability for incident review</li>
+            <li><strong class="text-slate-700">PII Encryption:</strong> AES-256-GCM with per-record initialization vectors. Student names and IDs encrypted at rest in PostgreSQL. Decryption only at the service boundary for authorized roles &mdash; never in logs or error messages</li>
+            <li><strong class="text-slate-700">Cursor-Based Pagination:</strong> Keyset pagination on composite <code>(created_at, id)</code> indexes &mdash; consistent performance at scale vs offset pagination</li>
+            <li><strong class="text-slate-700">RBAC:</strong> Server-enforced, not frontend-only. Professor role &mdash; scoped to assigned classrooms, blurred video feeds. Director role &mdash; full access, original video, export + settings permissions. JWT scope filtering on every query</li>
+            <li><strong class="text-slate-700">Risk Scoring:</strong> <code>score = &Sigma;(severity_weight &times; recency_decay &times; frequency_factor)</code> &mdash; exponential decay over 30 days, capped frequency multiplier</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Frontend — React 19 + TypeScript</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li>Vite 7 build, TailwindCSS, TanStack React Query for data fetching, Recharts for analytics, Framer Motion animations</li>
+            <li>7 pages: Dashboard (KPI spark cards + scenario overview), Alerts, Analytics, Students, Notifications, Scenarios Hub, Settings</li>
+            <li>9 settings tabs: Overview, Organization, Auth, Alerts, Notifications, Realtime, Integrations, Feature Flags, Maintenance</li>
+            <li>570+ i18n keys across Chinese (zh-CN) and English with browser auto-detection</li>
+            <li>Dark theme (<code>#0E1621</code> base), custom design tokens, KPI spark cards with inline sparkline charts</li>
+          </ul>
+
+          <h4 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Infrastructure</h4>
+          <ul class="text-sm text-slate-500 space-y-1.5 mb-5 list-disc list-inside">
+            <li><strong class="text-slate-700">Database:</strong> PostgreSQL 16 with JSONB, full-text search, materialized views, 20+ indexes</li>
+            <li><strong class="text-slate-700">Cache:</strong> Redis 7 for sessions, pub/sub, response caching, rate-limit counters, Socket.IO adapter</li>
+            <li><strong class="text-slate-700">Deploy:</strong> Docker Compose &mdash; 9 containers (7 services + PostgreSQL + Redis), multi-stage Dockerfiles, Nginx reverse proxy</li>
+            <li><strong class="text-slate-700">Observability:</strong> Pino structured JSON logging, correlation IDs, health check endpoints, service dependency graph</li>
+            <li><strong class="text-slate-700">Privacy:</strong> FERPA/COPPA consent tracking, dormitory entrance-only cameras, evidence redaction flags, configurable data retention (15&ndash;90 days)</li>
+          </ul>
+
+          <div class="glass rounded-xl p-4">
+            <p class="text-sm font-semibold text-slate-700 mb-1">Scale</p>
+            <p class="text-sm text-slate-500">7 microservices &middot; 51 cameras &middot; 5 environments &middot; 5 detection scenarios &middot; 9 settings modules &middot; 570+ i18n keys &middot; Event-sourced alerts &middot; AES-256-GCM PII encryption &middot; Bilingual (CN/EN)</p>
           </div>
         `
       }
@@ -2716,17 +2769,17 @@
       var isMobile = window.innerWidth < 768;
       var cards = document.querySelectorAll('#projects-grid > .project-card');
 
-      // Card order: ARA-3(0), Qanoun(1), mLoRA(2), Lushan(3), BizFinder(4), MedPredict(5)
-      // Mountain order: Qanoun(0), MedPredict(1), ARA-3(2), mLoRA(3), Lushan(4), BizFinder(5)
-      var mountainToCard = [1, 5, 0, 2, 3, 4];
+      // Card order: ARA-3(0), Qanoun(1), mLoRA(2), Lushan(3), MedPredict(4), StudentSafety(5)
+      // Mountain order: Qanoun(0), MedPredict(1), ARA-3(2), mLoRA(3), Lushan(4), StudentSafety(5)
+      var mountainToCard = [1, 4, 0, 2, 3, 5];
 
       var mountains = [
-        { name: 'Qanoun',     sub: 'AI Legal Platform',         x: 0.12, h: 0.55, color: [236,72,153] },
-        { name: 'MedPredict', sub: 'Medical Education AI',      x: 0.28, h: 0.68, color: [192,132,252] },
-        { name: 'ARA-3',      sub: 'Applicant Tracking System', x: 0.48, h: 1.00, color: [236,72,153] },
-        { name: 'mLoRA',      sub: 'Distributed LLM Training',  x: 0.63, h: 0.52, color: [129,140,248] },
-        { name: 'Lushan',     sub: 'AI Video Surveillance',     x: 0.78, h: 0.72, color: [192,132,252] },
-        { name: 'BizFinder',  sub: 'Business Discovery App',    x: 0.92, h: 0.40, color: [249,168,212] }
+        { name: 'Qanoun',         sub: 'AI Legal Platform',         x: 0.10, h: 0.55, color: [236,72,153] },
+        { name: 'MedPredict',     sub: 'Medical Education AI',      x: 0.28, h: 0.68, color: [192,132,252] },
+        { name: 'ARA-3',          sub: 'Applicant Tracking System', x: 0.46, h: 1.00, color: [236,72,153] },
+        { name: 'mLoRA',          sub: 'Distributed LLM Training',  x: 0.64, h: 0.52, color: [129,140,248] },
+        { name: 'Lushan',         sub: 'AI Video Surveillance',     x: 0.78, h: 0.72, color: [192,132,252] },
+        { name: 'Student Safety', sub: 'School Monitoring AI',      x: 0.92, h: 0.60, color: [16,185,129] }
       ];
 
       function mountainNoise(x, seed) {
@@ -2751,14 +2804,14 @@
       function generateAll() {
         allParticles = [];
         var ridges = [
-          { hScale: 1.0,  offX: 0,      spread: 0.09, countBase: 1200, countScale: 800,  seed: 0,    brightMul: 1.0 },
-          { hScale: 0.85, offX: 0.015,  spread: 0.11, countBase: 600,  countScale: 400,  seed: 7.7,  brightMul: 0.70 },
-          { hScale: 0.65, offX: -0.025, spread: 0.13, countBase: 300,  countScale: 200,  seed: 13.3, brightMul: 0.40 }
+          { hScale: 1.0,  offX: 0,      spread: 0.09, countBase: 600,  countScale: 400,  seed: 0,    brightMul: 1.0 },
+          { hScale: 0.85, offX: 0.015,  spread: 0.11, countBase: 300,  countScale: 200,  seed: 7.7,  brightMul: 0.70 },
+          { hScale: 0.65, offX: -0.025, spread: 0.13, countBase: 150,  countScale: 100,  seed: 13.3, brightMul: 0.40 }
         ];
         if (isMobile) {
           ridges.pop();
-          ridges[0].countBase = 800; ridges[0].countScale = 500;
-          ridges[1].countBase = 400; ridges[1].countScale = 200;
+          ridges[0].countBase = 400; ridges[0].countScale = 250;
+          ridges[1].countBase = 200; ridges[1].countScale = 100;
         }
 
         for (var m = 0; m < mountains.length; m++) {
@@ -2833,7 +2886,17 @@
         // no grid — clean light background
       }
 
+      var canvasVisible = false;
+      var animId = null;
+      var observer = new IntersectionObserver(function(entries) {
+        canvasVisible = entries[0].isIntersecting;
+        if (canvasVisible && !animId) animId = requestAnimationFrame(draw);
+      }, { threshold: 0 });
+      observer.observe(canvas);
+
       function draw(time) {
+        animId = null;
+        if (!canvasVisible) return;
         var t = (time - startTime) / 1000;
         ctx.clearRect(0, 0, W, H);
         drawGrid();
@@ -2928,7 +2991,7 @@
           ctx.fillText(mt.sub, cx, peakY - 5);
         }
 
-        requestAnimationFrame(draw);
+        animId = requestAnimationFrame(draw);
       }
 
       // highlight cards
@@ -2951,19 +3014,25 @@
         }
       }
 
-      // hover detection
+      // hover detection (throttled)
+      var hoverTicking = false;
       canvas.addEventListener('mousemove', function(e) {
-        var rect = canvas.getBoundingClientRect();
-        var mx = e.clientX - rect.left;
-        var my = e.clientY - rect.top;
-        hoveredIdx = -1;
-        for (var m = 0; m < mountains.length; m++) {
-          var mt = mountains[m];
-          if (Math.abs(mx - mt._cx) < mt._spread * 1.2 && my > mt._peakY - 40 && my < baseY + 20) {
-            hoveredIdx = m; break;
+        if (hoverTicking) return;
+        hoverTicking = true;
+        requestAnimationFrame(function() {
+          var rect = canvas.getBoundingClientRect();
+          var mx = e.clientX - rect.left;
+          var my = e.clientY - rect.top;
+          hoveredIdx = -1;
+          for (var m = 0; m < mountains.length; m++) {
+            var mt = mountains[m];
+            if (Math.abs(mx - mt._cx) < mt._spread * 1.2 && my > mt._peakY - 40 && my < baseY + 20) {
+              hoveredIdx = m; break;
+            }
           }
-        }
-        updateCards();
+          updateCards();
+          hoverTicking = false;
+        });
       });
 
       canvas.addEventListener('mouseleave', function() {
@@ -2973,7 +3042,6 @@
 
       window.addEventListener('resize', resize);
       resize();
-      requestAnimationFrame(draw);
     })();
 
 
