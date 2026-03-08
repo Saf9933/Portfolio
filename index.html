@@ -209,8 +209,8 @@
       transition: outline 0.15s ease;
     }
     .gh-cell:hover { outline: 2px solid rgba(236,72,153,0.5); outline-offset: 1px; }
-    .gh-month-labels { display: flex; gap: 3px; margin-bottom: 4px; padding-left: 32px; width: max-content; }
-    .gh-month-labels span { font-size: 10px; color: #94a3b8; flex-shrink: 0; }
+    .gh-month-labels { display: flex; gap: 3px; margin-bottom: 4px; padding-left: 38px; width: max-content; }
+    .gh-month-labels span { font-size: 10px; color: #94a3b8; flex-shrink: 0; width: 11px; overflow: visible; white-space: nowrap; }
     .gh-day-labels { display: flex; flex-direction: column; gap: 3px; margin-right: 6px; padding-top: 0; }
     .gh-day-labels span { font-size: 10px; color: #94a3b8; height: 11px; line-height: 11px; }
     .gh-year-btn {
@@ -1064,7 +1064,7 @@
        ════════════════════════════════════════════════════════════════ -->
   <section id="github" class="relative py-16 px-6 overflow-hidden">
     <div class="blob w-[300px] h-[300px] bg-purple-300/20 -top-16 -right-24" style="animation-delay:3s;"></div>
-    <div class="max-w-5xl mx-auto">
+    <div class="mx-auto" style="max-width:fit-content;">
       <div class="text-center mb-10">
         <h2 class="text-2xl sm:text-3xl font-bold text-slate-800" data-animate="fade-up">GitHub <span class="gradient-text">Contributions</span></h2>
         <div class="section-line" data-animate="fade-up"></div>
@@ -1424,7 +1424,7 @@
 
       <div class="grid md:grid-cols-2 gap-6" data-animate="fade-up">
         <!-- Article 1 -->
-        <a href="MEDIUM_ARTICLE_1_URL" target="_blank" rel="noopener" class="glass rounded-2xl p-6 glow-border block group">
+        <a href="https://medium.com/@salmaf999o/what-ive-built-ai-surveillance-legal-rag-distributed-llm-training-and-recruitment-platforms-61e5b97cfb43" target="_blank" rel="noopener" class="glass rounded-2xl p-6 glow-border block group">
           <div class="flex items-center gap-2 mb-3">
             <i class="fa-brands fa-medium text-slate-400"></i>
             <span class="text-xs text-slate-400 font-mono">Medium</span>
@@ -1435,7 +1435,7 @@
         </a>
 
         <!-- Article 2 -->
-        <a href="MEDIUM_ARTICLE_2_URL" target="_blank" rel="noopener" class="glass rounded-2xl p-6 glow-border block group">
+        <a href="https://medium.com/@salmaf999o/mlora-the-smarter-way-to-fine-tune-multiple-llms-at-once-c861a46aded2" target="_blank" rel="noopener" class="glass rounded-2xl p-6 glow-border block group">
           <div class="flex items-center gap-2 mb-3">
             <i class="fa-brands fa-medium text-slate-400"></i>
             <span class="text-xs text-slate-400 font-mono">Medium</span>
@@ -2251,14 +2251,10 @@
         weeks.forEach(function (week) {
           var firstDay = week.find(function (c) { return c.inRange; });
           var span = document.createElement('span');
-          span.style.width = '11px';
-          span.style.flexShrink = '0';
           if (firstDay) {
             var month = parseInt(firstDay.date.split('-')[1], 10) - 1;
             if (month !== lastMonth) {
               span.textContent = MONTHS[month];
-              span.style.width = 'auto';
-              span.style.minWidth = '11px';
               lastMonth = month;
             }
           }
